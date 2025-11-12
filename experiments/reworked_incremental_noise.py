@@ -281,7 +281,7 @@ def save_results(results, main_folder_path, experiment_type):
         json.dump({"results": results}, f, indent=4)
 
 #HYPERPARAMETERS (User can modify)
-DATASET_NAME = "all" # "all" or "retro" or "trident" or "moon_match" or "mountain_bike" or "alfred"
+DATASET_NAME = "all" # "all" or "retro" or "trident" or "alfred"
 EXPERIMENT_NAME = "improved_noise"
 N_SEEDS = 10
 N_NOISE_LEVELS = 30
@@ -307,7 +307,7 @@ REMOVE_STOPWORDS = True
 BATCH_SIZE = 64
 
 #GLOBAL VARIABLES (User should not modify)
-all_available_datasets = ["retro", "trident", "moon_match", "mountain_bike", "alfred"]
+all_available_datasets = ["retro", "trident", "alfred"]
 backlog_path = "datasets/{0}/{0}_backlog.csv"
 specs_path = "datasets/{0}/{0}_specs.pdf"
 output_folder_path = "experiments/output/{1}/"
