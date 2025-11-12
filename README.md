@@ -19,7 +19,7 @@ $$
     \texttt{Coh}(\mathcal{B})
 $$
 
-The $\texttt{Exhaustiveness}$ measures topic similarity between $\mathcal{R}$ and $\mathcal{B}$. In applied software engineering scenarios, it is crucial to monitor if the Product Owner, and other agile team members, write user stories strictly based on the specifications, hence the important of this metric. The depth level $l$, allows to compute similarity score at different scales of the backlog: $l=$"b" for backlog-level where $\mathcal{B}$ is compare at once with $\mathcal{R}$, $l=$"e" for epic-level where each epic $e_i$ is compared individual with $\mathcal{R}$ and $l=$"s" for story-level where each user story $s_j$ is compared to $\mathcal{R}$. Finally, $\sigma$ the similarity can be any NLP metric comparing two natural language texts such as ROUGE, BLEU or Bertscore.
+The $\texttt{Exhaustiveness}$ measures topic similarity between $\mathcal{R}$ and $\mathcal{B}$. In applied software engineering scenarios, it is crucial to monitor if the Product Owner, and other agile team members, write user stories strictly based on the specifications, hence the important of this metric. The depth level $l$, allows to compute similarity score at different scales of the backlog: $l=\text{"b"}$ for backlog-level where $\mathcal{B}$ is compare at once with $\mathcal{R}$, $l=\text{"e"}$ for epic-level where each epic $e_i$ is compared individual with $\mathcal{R}$ and $l=\text{"s"}$ for story-level where each user story $s_j$ is compared to $\mathcal{R}$. Finally, $\sigma$ the similarity can be any NLP metric comparing two natural language texts such as ROUGE, BLEU or Bertscore.
 
 $$
 \texttt{Exh}(\mathcal{R}, \mathcal{B}, l)
