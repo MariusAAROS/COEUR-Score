@@ -1,0 +1,4 @@
+Metric,ROUGE-1,ROUGE-2,ROUGE-L,BERTScore-P,BERTScore-R,BERTScore-F1
+COEUR,0.846***,0.790**,0.748**,0.503,0.664*,0.650*
+Cohesion,0.622*,0.573,0.566,0.182,0.336,0.350
+Exhaustiveness,0.860***,0.769**,0.762**,0.587*,0.804**,0.769**

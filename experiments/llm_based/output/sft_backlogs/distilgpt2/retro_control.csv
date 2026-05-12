@@ -1,0 +1,186 @@
+initiative,epic,type,user_story
+System Features,START NEW PROJECT,Description and Priority,The START NEW PROJECT function shall allow the user to create a new project.
+System Features,START NEW PROJECT,Functional Requirements,The user shall be prompted to provide the new project name.
+System Features,START NEW PROJECT,Functional Requirements,The user shall be prompted to provide the low level document path.
+System Features,START NEW PROJECT,Functional Requirements,The user shall be prompted to provide the high level document.
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to select an IR Method from the following list: Vector-Space Retrieval Keyword Extraction Keyword Extraction-IDF
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to select a Vocabulary Base of either “Both Documents” or “Low Level Document Only”.  The default value is “Both Documents”.
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to provide Weight Option from the following list: TF-IDF (Default) Okapi LTU
+System Features,START NEW PROJECT,Functional Requirements,"If the user has selected an IR Method of Keyword Extraction or Keyword Extraction-IDF, the user must also select a Weight Threshold."
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to provide a Thesaurus Filename.
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to provide the Stop Word file.
+System Features,START NEW PROJECT,Functional Requirements,The user shall optionally be prompted to provide a Feedback Method.  “Standard Rochio” is currently the only option.
+System Features,START NEW PROJECT,Functional Requirements,The user shall be able to cancel the process and return to the previous state at any time before the project is created.
+System Features,START NEW PROJECT,Functional Requirements,The user shall be able to create the project using the above input.  The project shall be placed in “Trace” mode.
+System Features,Load Project,Description and Priority,"Since the majority of projects are not completed in a single setting, then it is critical to provide the user the option to load an existing project to continue working on the project.  Load Project feature will provide the user the capacity to open an existing project in the last saved state with all the associated mode options. [1]"
+System Features,Load Project,Functional Requirements,The user shall be prompted to select a project name from a list of saved projects.  Project names are obtained by scanning the saved projects directory.
+System Features,Load Project,Functional Requirements,The user shall be prompted to select a feedback method.  The only option is “Standard Rochio”.
+System Features,Load Project,Functional Requirements,The user shall be able to cancel the LOAD PROJECT action and return to the previous activity.
+System Features,Load Project,Functional Requirements,The user shall be able to load the project once the project name and feedback method is selected.
+System Features,LOAD RTM,Description and Priority,"Similar in functionality to the START NEW PROJECT function, the LOAD RTM function collects project parameters from the user and initializes the project.  A project created via the LOAD RTM function may be in either “trace” or “assess” mode.  Assess mode is usually used when the user is provided a RTM and needs to evaluate its accuracy, completeness, and satisfaction level."
+System Features,LOAD RTM,Functional Requirements,The user shall be prompted to provide the new project name.
+System Features,LOAD RTM,Functional Requirements,The user shall be prompted to provide the low level document path.
+System Features,LOAD RTM,Functional Requirements,The user shall be prompted to provide the high level document path.
+System Features,LOAD RTM,Functional Requirements,The user shall be prompted to provide the RTM file path.
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to select an IR Method from the following list: Vector-Space Retrieval Keyword Extraction Keyword Extraction-IDF
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to select a Vocabulary Base of either “Both Documents” or “Low Level Document Only”.  The default value is “Both Documents”.
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to provide “Weight Option” from the following list: TF-IDF (Default) Okapi LTU
+System Features,LOAD RTM,Functional Requirements,"If the user has selected an IR Method of “Keyword Extraction” or “Keyword Extraction-IDF”, the user must also select a “Weight Threshold”."
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to provide a “Thesaurus” filename.
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to provide the “Stop Word” filename.
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to provide a “Feedback Method”.  “Standard Rochio” is currently the only option.
+System Features,LOAD RTM,Functional Requirements,The user shall optionally be prompted to provide the “Project Mode” of either “Trace” or “Assess”.  “Trace” is the default mode.
+System Features,LOAD RTM,Functional Requirements,The user shall be able to cancel the process and return to the previous state at any time before the project is created.
+System Features,LOAD RTM,Functional Requirements,The user shall be able to create the project using the above input.  The project shall be placed in specified “Project Mode”.
+System Features,SAVE,Description and Priority,The user shall be able to activate the SAVE function to save the current data and status of the project.
+System Features,SAVE,Functional Requirements,When activated RETRO will save all current data and project.
+System Features,CLOSE CURRENT PROJECT,Description and Priority,The CLOSE CURRENT PROJECT Function will allow the user to close a given project without exiting the RETRO application.
+System Features,CLOSE CURRENT PROJECT,Functional Requirements,The user shall be able close the current project.
+System Features,EXIT,Description and Priority,It is necessary to provide a mechanism to exit the RETRO application when the user is finished working with the application.
+System Features,EXIT,Functional Requirements,The user shall be able to exit the application.
+System Features,SHOW XML,Description and Priority,"Create a story by pressing on the Create button on the main window.
+
+The user shall be able to start a new story.
+
+Once the user starts a new story, a progress bar will be created with a new color. The user shall be able to change the color at any time with the help of the color bar. The user shall be able to
+
+create a new XML file with an XML file.
+
+3.7.3 Sorting a XML Document
+
+In order to sort an XML file, the user must use the <XmlSort>:Function. The sorting must be supported by the user.
+
+The following functions are supported:
+
+Function Function
+function function(x, y)"
+System Features,SHOW XML,Functional Requirements,"- To submit your user story:
+- In the left pane of the story pane open ""SHOW XML"", and select ""Generate report"". Select ""RTM"".
+- In the right pane, click and drag on the XML root element, and drag and drop into the XML file, and create the XML file in a file folder."
+System Features,GENERATE REPORT,Description and Priority,"After a project has completed either a trace or an assess process, then the user will need the capability to review the final results of the process in an easy to read format other than the XML file format that is automatically generated throughout the process.  The GENERATE REPORT function will provide the user a list of reports that the user may view.  The user will have the option to save the generated report or modify the design of the report. [1]"
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “RTM report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Parent with no children report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Parents with no children with text report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Children with no parents report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Children with no parents with text report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Not satisfied requirements report”
+System Features,GENERATE REPORT,Functional Requirements,The user shall be able to generate and save the “Not satisfied requirements with text report”
+System Features,FILTER LOW LEVEL REQUIREMENTS,Description and Priority,“The user shall be able to limit the display of low-level requirements or candidate requirement links.” [1]
+System Features,FILTER LOW LEVEL REQUIREMENTS,Functional Requirements,The user shall be able to designate whether the filter process applies to the selected high level document element (LOCAL) or to all high level document elements (GLOBAL).
+System Features,FILTER LOW LEVEL REQUIREMENTS,Functional Requirements,The user shall be able to filter the list of low-level requirements by setting a cutoff point for the weight between 0 and 1.0.
+System Features,FILTER LOW LEVEL REQUIREMENTS,Functional Requirements,The user shall be able to designate that the top N elements to be displayed.
+System Features,FILTER LOW LEVEL REQUIREMENTS,Functional Requirements,The user shall be able activate a KILL HIDDEN Links function to remove all elements not currently displayed.
+System Features,DISPLAY LOW LEVEL ELEMENTS,Description and Priority,"The user will need the ability to view the text of low-level requirements.  The DISPLAY function will provide three different sort options to view the text of low-level requirements.  The user can sort the low-level requirements based upon the weight of linking relationships, original document order, or by requirement id. [1]"
+System Features,DISPLAY LOW LEVEL ELEMENTS,Functional Requirements,The user shall be able to sort the low level documents by “Requirement ID”
+System Features,DISPLAY LOW LEVEL ELEMENTS,Functional Requirements,The user shall be able to sort the low level documents by “Weights”
+System Features,DISPLAY LOW LEVEL ELEMENTS,Functional Requirements,The user shall be able to sort the low level documents by “Document Order”
+System Features,FEEDBACK,Description and Priority,Since RETRO’s tracing and assessing modes are based upon algorithms that will allow processes to be improved as the system receives FEEDBACK from the user.
+System Features,FEEDBACK,Functional Requirements,The user shall select a low level requirement and identify the link status from the following list: Link No Link Default
+System Features,MULTIPLE PROJECTS,Description and Priority,The user shall be able to load multiple projects at the same time.
+System Features,MULTIPLE PROJECTS,Functional Requirements,The RETRO System shall allow multiple projects to be open at the same time
+System Features,IMPORT,Description and Priority,"3.14 Description and Priority
+The user shall be able to extract source code from an existing user story. 3.14.1 Description and Priority
+After extraction, the user shall be able to use the user story for the first time. 3.14.2 Description and Priority
+The user shall be able to identify the various objects in the user story and use the user story to define a
+
+User Story with the following:
+- the user story has a defined scope
+- the user story has a set of tasks with associated tasks
+- the user story has its goals specified and it is in a context where the user story has been previously
+- the user story has an associated target object
+
+
+User"
+System Features,IMPORT,Functional Requirements,"User Story:
+1. The user shall be able to insert project references from the file system.
+
+Generate a new User Story:
+
+User Story:
+2. The user shall be able to insert names of folders (in the form of sub-directories) from the file system.
+
+Generate a new User Story:
+
+User Story:
+3. The user shall be able to insert a list of files which contains project name and link information and save them in the file system.
+
+Generate a new User Story:
+
+User Story:
+4. The user shall be able to insert a list of folders with project files.
+
+Generate a new User Story:
+
+User Story:
+5"
+System Features,GUI INTERFACE,Description and Priority,The user shall use a GUI INTERFACE to work with RETRO.
+System Features,GUI INTERFACE,Functional Requirements,The RETRO System shall provide a GUI mechanism for the user to interact with the RETRO System.
+BROWSE MODE,KEYWORD SEARCH,Description and Priority,"The user is provided the capability via BROWSE mode to manually link low-level requirements to high-level requirement. In order to help the user to quickly locate the desired low-level requirement or high-level requirement, a KEYWORD SEARCH function is offered to the user. [1]"
+BROWSE MODE,KEYWORD SEARCH,Functional Requirements,The user shall be able to enter a keyword into a search text box to search within low-level requirements and the system shall return matches.
+BROWSE MODE,KEYWORD SEARCH,Functional Requirements,The user shall be able to enter a keyword into a search text box to search within high-level requirements and the system shall return matches.
+BROWSE MODE,MANUAL LINKING/TRACING,Description and Priority,"EconoMIC R3 R3
+- To allow user to generate and verify the requirement for a list of low-level requirements.
+
+Define high-level requirements, based on a specific set of requirements and the number of required elements.
+1. The user shall have the right to create a list of necessary low-level requirements and to remove them from his or her project list.
+2. Users shall be able to select low-level requirements with higher priority to select high-level requirements.
+
+If a user would like to add more high-level requirements or to delete a low-level requirement, the user shall have the right to do that, as long as
+they do not exceed the user’s"
+BROWSE MODE,MANUAL LINKING/TRACING,Functional Requirements,"User Story Creation:
+
+User Story for MANUAL LINKING/TRACING:
+
+User Story for LINKING:
+
+6.2.3 Functional Requirements
+
+Functional requirements can be a combination of “all of these items” or may be separate requirements. A “all of these items” or “all of these requirements” should be added in the same function of user story.  PASS agrees with BROWSE’s assessment of the list of functional requirements to high-level requirements. [1] 1.11.1 Functions of Functional Requirements
+
+Functional Requirements should be defined in a simple and concrete way. Functional requirements should be defined in a direct and easy-to-understand manner and"
+TRACE MODE,TRACING,Description and Priority,One of the purposes of RETRO is to aid the user in linking low-level requirements with high-level requirements.  TRACING functionality is the component of RETRO that automatically generates a list of candidate links of high to low-level requirements.
+TRACE MODE,TRACING,Functional Requirements,RETRO shall provide a mechanism for the user to generate a trace on all requirements.
+TRACE MODE,TRACING,Functional Requirements,RETRO shall provide a mechanism for the user to generate a trace on a given requirement(s).
+TRACE MODE,TRACING RESULTS,Description and Priority,"After the TRACING function is performed, then the results of the TRACING process will need to be made available to the user to view.  The TRACING RESULTS functionality will display a list of all candidate links of high to low-level requirements based on any given filtering criteria.  The user will be allowed to provide feedback on the TRACING RESULTS in order to improve future TRACING."
+TRACE MODE,TRACING RESULTS,Functional Requirements,"RETRO shall display the list of candidate links based on the tracing and permit feedback, filtering, and display functionality."
+TRACE MODE,SAVE TRACE,Description and Priority,The SAVE TRACE function shall allow the user to save the trace result.
+TRACE MODE,SAVE TRACE,Functional Requirements,RETRO shall provide a mechanism to save the current status of trace.
+TRACE MODE,COMPLETING TRACE,Description and Priority,"COMPLETING TRACE [|
+
+Description and Priority
+
+PROTOTYPE: A simple, reusable function for testing a new code. When done, it can be run directly from the REPL, or it can provide feedback to the user. 5.4.2 Functional Requirements 5.4.2.1 RETRO shall mark the project completed and not permit further changes.
+
+The application of the TRACING function should not introduce any side effects, because the TRACING function is the main thread in the system, and the system should be written in such a way that it can be interrupted by its own code (i.e. by running TRACING with -e option).
+
+When"
+TRACE MODE,COMPLETING TRACE,Functional Requirements,"- 1) To activate the REPT:
+- Select Project (P)
+- Select Compiler (C)
+- Select Compiler
+- Click the Start Trace button.
+- The current project will be the target of the new user story.
+- The RECORD command should be pressed to save the records of all projects.
+
+Generate a new User Story:
+- 2) To terminate the RECORD:
+- Select Project
+- Select Compiler (C)
+- Select Compiler
+- Click the Stop Trace button.
+- A new Record should be displayed and the RECORD command will be pressed.
+
+To end the RECORD:
+- 3) To terminate RECORD:"
+ASSESS MODE,RUN ACCURACY & COMPLETENESS,Description and Priority,The user needs a mechanism that will help to determine whether the TRACING was successfully performed based on accuracy and completeness.  An accuracy test tells the user that the candidate links provided are correctly related to the high-level requirement.  Completeness test tells the user that all possible links that are listed in the candidate list are included and no low-level requirements are missing. [1]
+ASSESS MODE,RUN ACCURACY & COMPLETENESS,Functional Requirements,RETRO shall provide a mechanism for the user to be able to run an ACCURACY & COMPLETENESS check by performing a full trace on the requirements and comparing the IR method results to the given RTM. [1]
+ASSESS MODE,SHOW RECOMMENDATIONS LIST,Description and Priority,“The [user] will need to have a list of recommendations based on RETRO’s TRACING process.  SHOW RECOMMENDATION will display to the [user] a list of recommendation while in ASSESS mode.  The [user] will have the capability to provide FEEDBACK to the RETRO system on whether or not the [user] agrees with RETRO’s assessment of the linking between the low-level requirements to the high-level requirements.” [1]
+ASSESS MODE,SHOW RECOMMENDATIONS LIST,Functional Requirements,RETRO shall display/hide recommendations at the user’s request.
+ASSESS MODE,RUN SATISFACTION ANALYSIS,Description and Priority,"Satisfaction function shows how satisfied the high-level requirement is with the given set of low-level requirements. [4] The Satisfaction Analysis function is checking the level of percentage for a satisfaction of the linked result with the high and low level input files. Once final output is agreed, the list of high level requirement is updated with options like “Satisfied”, “Not Satisfied” and “Partially Satisfied”. The status of high level requirement is color coded. Unsatisfied result can be repeated until all the high levels has been satisfied stage."
+ASSESS MODE,RUN SATISFACTION ANALYSIS,Functional Requirements,RETRO shall display to the user the percentage level of link. [1]
+ASSESS MODE,REMOVE ALL NO LINKS,Description and Priority,"While in ASSESS mode, the user will need a mechanism to allow the removal of all low-level requirements that are not linked to a high-level requirement.  REMOVE ALL NO LINKS function will provide an easy way for the user to quickly remove low-level requirements with status of “No Link”."
+ASSESS MODE,REMOVE ALL NO LINKS,Functional Requirements,RETRO shall remove all links marked as “No Link”
+ASSESS MODE,DELETE RECOMMENDED LINKS,Description and Priority,"While in ASSESS mode, the user will need a mechanism that will allow the deletion of recommended links that the user feels are not correctly linked."
+ASSESS MODE,DELETE RECOMMENDED LINKS,Functional Requirements,RETRO shall permit the user to select a recommended link and delete it.
+ASSESS MODE,COLOR-CODED SATISFACTION STATUS,Description and Priority,"“In order to help the user to quickly identify the level of satisfaction of each candidate link, RETRO will need to provide a visual aid.  COLOR-CODED SATISFACTION STATUS function will color code each candidate link based on its satisfaction level.   The various colors will be a visual aid to the user to help quickly identify each links satisfaction level.” [1]"
+ASSESS MODE,COLOR-CODED SATISFACTION STATUS,Functional Requirements,RETRO shall COLOR-CODE THE SATISFACTION STATUS of each given candidate link.
