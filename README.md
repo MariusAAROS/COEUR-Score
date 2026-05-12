@@ -37,9 +37,8 @@ $$
 \texttt{Coh}(\mathcal{B}) = \frac{\psi(y_{\text{epic}}, \phi_\theta(\mathcal{B})) \times \rho}{\psi(y_{\text{epic}}, \phi_\theta(\mathcal{B})) + \rho}
 $$
 
->[!NOTE]
-The penalization of the cohesion is updated compared to the original paper as it yields better overall results. $\rho$ corresponds to the Type-Token Ratio (TTR) of the subset of user stories in the backlog $\mathcal{B}$.
-
+> [!NOTE]
+> The penalization of the cohesion is updated compared to the original paper as it yields better overall results. $\rho$ corresponds to the Type-Token Ratio (TTR) of the subset of user stories in the backlog $\mathcal{B}$.
 
 $$
 \rho(\mathcal{B}) = \frac{|\text{unique\_tokens}(\mathcal{B})|}{|\text{total\_tokens}(\mathcal{B})|}
