@@ -1,0 +1,340 @@
+id,user_story,title,priority,user_group,tasks,epic
+US001,"Useful Resources:
+
+- What the user of ALFRED wants to do
+- Who ALFRED is for
+- What type of data is ALFRED used to work with
+
+- What ALFRED does
+- How the data is used
+- What user group ALFRED is for
+- What ALFRED is a tool for
+- What the ALFRED company does
+
+User Testing:
+
+- Using the user's specific problem and the information in the previous user stories
+- Designing a list of user needs with the user's requirements
+- User testing ALFRED
+- Testing of ALFRED in the real world
+
+- Developing a new User Story:
+
+Use the",Personal data,2,Older Person,"['T31', 'T32', 'T34']",UC11
+US002,"The following is a possible User Story for ALFRED in the user group ""Older Person"" (see user group description below).",Speech interaction,1,Older Person,"['T32', 'T41', 'T42', 'T44']",UC12
+US003,As an older person I would like use only well-visible buttons,Buttons,2,Older Person,"['T32', 'T33', 'T41']",UC31
+US004,"ALFRED User Story 049:
+User wants to tell ALFRED to tell their agenda.
+User wants ALFRED to say ""yes"" to my requests and ALFRED can take my Agenda and tell me that my Agenda is ready
+
+Generate a new User Story:
+ALFRED User Story 070:
+ALFRED want me to talk more with ALFRED, ALFRED want to say ""good job"" and ALFRED can take my Agenda
+
+Generate a new User Story:
+ALFRED User Story 082:
+ALFRED wants me to read my emails, but ALFRED want me to take my Email and ALFRED want me",Speech interaction,1,Older Person,"['T32', 'T33', 'T41']",UC12
+US005,"Epic 1
+A user needs ALFRED to maintain their profile.  It will be important to have a user interface on which ALFRED will be able to set their privacy
+settings and allow the user to manage their data as a member of the ALFRED Community.
+
+The user interface will make it easier for the user to create ALFRED, access and manage their profile and for the user to share their data with ALFRED.
+
+Provide a user interface that allows ALFRED to store and retrieve data.
+
+Share ALFRED with other user communities.  This will allow ALFRED to be a part of ALFRED's communities and help to
+ensure the ALFRED solution",Control,3,Older Person,['T51'],UC11
+US006,"- The user will use ALFRED to send a message to their Facebook friend (friend of friend) .
+
+- The user can type a message to a friend (friend of friend)
+- The user will be redirected to ALFRED by the computer (alfred) .
+- The user is then able to post messages to friends and family (all members of ALFRED) .
+- The user will be redirected to ALFRED by ALFRED.
+
+Creating the User Story:
+- The user will have to complete the user story in a very detailed and detailed way
+- The user story will need to be tested and validated as is .
+
+- The user will have to decide whether",Privacy,2,Older Person,"['T34', 'T51']",UC11
+US007,"User Stories
+
+A few weeks ago, a friend informed me that he was having trouble adjusting his ALFRED devices. He had just purchased new ALFRED devices, and he was confused by the different settings. He had used ALFRED several times a day, and he was using ALFRED for a few hours each day. He was using ALFRED to send emails with his contacts, he was using ALFRED to view his contacts in two different browsers - on one ALFRED device and on another (ALFRED 2.0). He would often change a few settings on his ALFRED device, and on his ALFRED browser. He thought that ALFRED was a bit old and complicated",Installation,5,Older Person,"['T42', 'T44']",UC11
+US008,(No response yet),Wearable I,2,Older Person,"['T32', 'T42']",UC21
+US009,"In this User Story:
+
+How the user can change their current usage in terms of:
+- Adding/Removing new apps to ALFRED
+- Changing their existing app to become ALFRED
+- Sharing their recent usage with ALFRED
+
+This User Story is for the following users:
+- Otto
+- Liz
+
+Annex: How ALFRED is developed:
+
+The ALFRED Platform is a full software and data sharing and communication platform that makes it easy to share data and services from the different data bases in the platform. The ALFRED platform is integrated with a range of data bases in different domains and supported by various data bases such as:
+- The Google Cloud Platform",On mobile support,4,Older Person,"['T32', 'T43']",UC21
+US010,As an older person I would like have ALFRED on a bracelet or a necklace so I can always wear him with me,Wearable II,4,Older Person,"['T42', 'T62']",UC32
+US011,"- A simple but user friendly example of how ALFRED can be integrated
+
+You may also wish to submit a new User Story",Clear instructions and Troubleshooting,4,Older Person,['T43'],UC11
+US012,"As an older person, I would like to have ALFRED speak very slowly and clearly",Clear speaking,3,Older Person,"['T41', 'T43']",UC31
+US013,"An old person would be a great fit in a new world. I want to create a new user story that will be
+generated for ALFRED if ALFRED is in the meeting. The user story is going to involve the meeting and
+the meeting itself. The user story can be generated if the meeting was a meeting where
+ALFRED was present and ALFRED was not. ALFRED could get some support if ALFRED did not
+have a meeting in the meeting.
+
+Sample User Story:
+""I have two meeting days each week. I always sit in the meeting and get to talk to someone
+other than ALFRED""
+
+Generate a User Story:
+
+I want to create",Reaction,4,Older Person,"['T41', 'T43', 'T44']",UC12
+US014,"Table 81: User Story 065: When I get a call I want to tell ALFRED what I heard. ............................ 64
+In the future I want ALFRED to tell me anything I want
+
+Create a new User Story:
+
+Table 82: User Story 067: When I get a call I want to tell ALFRED what I heard. .............. 86
+If I get a call for anything I want you to tell me about it
+- What is this person wearing
+- How is he feeling?
+- How was he feeling today
+- How was the weather?
+- What was his work related to",Control,2,Older Person,"['T41', 'T43']",UC12
+US015,"What is the ALFRED user story
+What is the ALFRED user stories, then select it for use as user story to use at
+user story and submit the description in this section.
+How is the user story and user stories described?
+How is the user story related to user stories in the model?
+What is the user story?
+
+The first user story.
+What is the user story? It is a basic question such as: “What would I do if I had no ALFRED” in the model.
+What is the user story in this model? There are four ALFRED pillars in this model. The question, “What would I do if I had no ALFRED” is the",Training,3,Older Person,"['T41', 'T43', 'T44', 'T51', 'T61', 'T71']",UC12
+US016,"User Stories:
+
+Please click to add your own user stories to this list!",Buying,4,Older Person,['T91'],UC21
+US017,,Cost of ALFRED,4,Older Person,['T94'],UC11
+US018,"As an older person I would like to receive visual support, especially when looking at a list, map or agenda",Visual support,3,Older Person,['T43'],UC31
+US019,As an older person I would like to use ALFRED to pay for small amounts,Payments,4,Older Person,"['T42', 'T43']",UC13
+US020,"EJ20: I love using ALFRED in a public space, but I am reluctant when it comes to using it inside my home.
+
+User Story:
+- I need to see ALFRED.
+- In my home, ALFRED is very large, bulky and it is difficult to carry with me
+- In the office, ALFRED is very small and it is easy to carry with me
+- I don’t like that there is no UI on the interface at all
+- I don’t like the feeling of having to control the device.
+
+User Scenario:
+- The first thing I would like to try out before I try ALFRED in my home office
+- It",Battery,3,Older Person,['T42'],UC21
+US021,Please select the user story you want to create or modify and create or modify it on the user story management interface,Low Battery,2,Older Person,['T42'],UC21
+US023,"As an older person, I would like ALFRED be easily adapted for user that have visual troubles",Adaptability for vision,2,Older Person,"['T34', 'T41', 'T43']",UC31
+US024,"As an older person, I would like ALFRED be easily adapted for user that have hearing troubles",Adaptability for audition,4,Older Person,"['T34', 'T41', 'T43']",UC31
+US025,"As an older person, I woule like ALFRED to repeat the last phrase",Repeat,2,Older Person,"['T34', 'T41', 'T43']",UC31
+US026,"As an older person, I would like to be able to zoom into visual content",Zoom,3,Older Person,"['T34', 'T41', 'T43']",UC31
+US027,"[Name of the User Story]
+1. Ask Dave if the ALFRED app can be installed and downloaded using the smartphone app store
+
+[Example of the User Story]
+
+[Title of the User Story]
+
+2. Will Dave be able to download the app without downloading any apps?
+
+[Example of the User Story]
+
+[Author(s) of the User Story]
+
+
+3. Will Dave be able to get more information about the ALFRED app?
+
+[Example of the User Story]
+
+[Author(s) of the User Story]
+
+4. Will Dave be able to access the ALFRED site by email?
+
+[Example of the User Story]",Changing demand,3,Older Person,"['T34', 'T44']",UC21
+US028,"We use the ALFRED app to manage the old and new users. We use a feature where users are asked to register with the ALFRED app. We can receive the user's name and details such as a contact, social network, date of birth
+and mobile phone number.",Communication with entourage,2,Older Person,"['T41', 'T43', 'T54']",UC11
+US029,"As an older person, I would like to have video conversation with others",Video Conversation I,4,Older Person,['T43'],UC13
+US031,"As an older person, I would like ALFRED to encourage its users for real interaction between humans and not only with ICT-tools",Human Interaction,2,Older Person,"['T43', 'T52', 'T54']",UC13
+US032,"- When I am driving along the road in a big traffic jam, ALFRED will be the best app for me to
+
+- What do you like about ALFRED App?
+- I like the user interface: The mobile app provides an excellent interactive experience and user feedback
+
+- How should you design a user story?
+- User Stories should be simple and concrete but also engaging to the user and provide the user with an
+
+User Story - What do you like about the story?
+- I prefer the user interface simple and concrete because it’s a simple app
+
+- What are some common user stories?
+
+- My story would like to have the app built upon my experience and knowledge and I would like",Information about interesting Apps,3,Older Person,"['T41', 'T44', 'T72']",UC21
+US033,"1. Provide an opportunity for ALFRED to take a rest.  Give ALFRED a place where he can go to relax while playing music and talk to friends.
+2. Provide ALFRED with food and water.  ALFRED can take his food and water and put it in a small pouch which his family will have and feed him with some food and water he will bring.
+3. ALFRED will need to wear a small device to make sure he keeps a track of his time
+4. ALFRED will have a large, comfortable, bright and very durable computer mouse
+
+What should a new User Story be about:
+1. Give a User Story about a device",Customizing Preferences,2,Older Person,"['T34', 'T43', 'T51']",UC21
+US035,As an older person I would like to have my data stored directly on the phone,Data storage on Phone,3,Older Person,"['T31', 'T42']",UC14
+US036,As an older person I would like to receive a wake up call from ALFRED in the morning checking on me if I am ok,Wake up call,1,Older Person,"['T43', 'T63']",UC23
+US037,"It's not hard to think about how to write a User Story to include the support in their lives.
+In this User Stories we'd like the user to be able to communicate with the help of spoken language, so we'll focus on how to generate a user story that can be used by us to work together with people.
+
+The User Story can be used as a set of prompts that could be used by us to work together on projects:
+- to design the system and test it
+- to test the system after our user has become a partner with the project
+
+Note: To avoid people trying to cheat, and to avoid the temptation of using the user story to force the users to tell the story for us, we",Agenda,3,Older Person,"['T34', 'T42', 'T43', 'T44']",UC12
+US038,As an older person I would like to receive support to use the public transport,Public transport,1,Older Person,"['T32', 'T42', 'T43']",UC32
+US039,As an older person I would like to use ALFRED for navigation,Navigation,1,Older Person,"['T32', 'T42', 'T43']",UC13
+US040,As an older person I would like to use ALFRED for touristic walks and indications with explanations on historical and cultural sights,Tourist information,3,Older Person,"['T32', 'T33', 'T42', 'T43']",UC32
+US041,As an older person I would like to receive support to have a taxi on time,Taxi,1,Older Person,"['T41', 'T43']",UC13
+US047,As an older person I would like to use ALFRED to watch movies,Media I,4,Older Person,"['T41', 'T42', 'T44']",UC31
+US048,As an older person I would like to use ALFRED to hear about the news,Media II,2,Older Person,"['T41', 'T42', 'T44']",UC31
+US049,As an older person I would like to use ALFRED to contact help in case of an emergency,Emergency I,2,Older Person,"['T42', 'T61', 'T62', 'T63']",UC32
+US051,"As an older person, I would like ALFRED to contact the nearest caregiver when I ask ALFRED for urgent help",Emergency III,3,Older Person,"['T42', 'T61', 'T62', 'T63']",UC23
+US052,As an older person I would like to receive a message when my home care nurse is on her way,Home care,4,Older Person,['T43'],UC13
+US053,As an older person I would like to receive a medicine reminder from ALFRED,Medicine,1,Older Person,"['T31', 'T43', 'T44', 'T61']",UC23
+US054,"As an older person, I would like to be able to see whether I already have taken my pills in order to avoid overdose",Pills reminder and validation,3,Older Person,"['T31', 'T43', 'T61']",UC23
+US056,As an older person I would like to use ALFRED to do my grocery shopping,Grocery Shopping,4,Older Person,"['T41', 'T44']",UC23
+US057,As an older person I would like to use ALFRED to send messages,Messages,1,Older Person,"['T33', 'T41', 'T43']",UC23
+US058,As an older person I would like to ALFRED detect falls and send an emergency to a specific contact,Fall detection,2,Older Person,"['T62', 'T63']",UC32
+US059,"As an older person, I would like to have ALFRED to suggest healthy recipes",Healthy Recipes,4,Older Person,"['T43', 'T44', 'T61']",UC23
+US060,"As an older person, I would like to ALFRED to ask spontaneous questions but it would be better to programme it during certain times of the day",Spontaneous Questions by ALFRED,3,Older Person,"['T33', 'T41', 'T43']",UC31
+US061,"As an older person, I woule like ALFRED to initiate questions, but it should be in the domains of my interest such as cinema, exhibitions, cooking",Targeted Spontaneous Questions,3,Older Person,"['T33', 'T34', 'T41', 'T43', 'T44', 'T51']",UC31
+US062,As an older person I would like to be able to call someone with ALFRED,Calls with ALFRED,1,Older Person,"['T33', 'T41', 'T43']",UC31
+US063,As an older person I would like to activate the vocal interaction mode of ALFRED by pushing a specific button,Activation of vocal interaction with ALFRED,1,Older Person,['T43'],UC31
+US064,"Please use the form below to send us a new user story which your clients will use.
+
+Your Story
+
+The 4th paragraph is not included in the proposal, it should be left blank.
+
+Add your Story
+
+
+(will not be published)
+
+Add your story",Contacts,2,Older Person,"['T31', 'T43', 'T51']",UC12
+US065,"For each of the user profiles (age group and the user group)
+
+Create a user story for each of the user profile.  The user story defines who is who and what you will do using ALFRED.
+
+The first version of the user story is “I will send a notification to my boss who is my boss when I make a request”.  This is the basic User Story.
+
+Next the user story is “I will take my meeting request from my boss’ desk”.  This is a slightly more complex User Story and also it contains the “I will take a meeting request from my boss’ desk” and will also take a notice to my boss from the meeting”.  (This user story also includes",Agenda I,2,Older Person,"['T34', 'T41']",UC12
+US066,"In the previous User Story, ALFRED used voice control over the interaction with ALFRED and I used voice control for this User Story.
+
+A small group of users of ALFRED
+
+You can find the list of users in your system using the following command.
+
+USER_HOME /usr/share/alfred/Users
+
+This is the command that gets the list of users and their names. You can also do it using the following command:
+
+USER_HOME /usr/share/alfred/Users/
+
+Generate a new User Story:
+As shown above, ALFRED, a personal computer, uses voice control over the interaction with ALFRED and I use voice control for this",Agenda II,2,Older Person,"['T33', 'T34', 'T41']",UC12
+US067,"1. When a patient requires special services, a patient will need to select which
+specific services are relevant to them (eg. emergency services, doctor appointments, etc.)
+2. When a child with a disability or any of their children is admitted to a
+nursing home, they may be told to choose where the staff could be placed (eg. nurse, doctor, etc.)
+3. When a patient with a speech/language diagnosis has made a referral, they may be told
+to pick a person with whom to communicate with
+4. When a patient requires a special medical assistance plan and the plan is made, an adult
+will then be asked to sign that the support will be used only with the person.
+5",Reminders I,1,Older Person,"['T43', 'T44']",UC12
+US068,As an older person I would like to receive a reminder from ALFRED on all the things I need to bring with me when I leave the house,Reminders II,3,Older Person,"['T42', 'T43']",UC23
+US070,"(This example of user story construction involves the construction of the following user story: What is the goal of ALFRED)?)
+ALFRED goal
+
+For this user story, the user has the task of adding information to the user interface.
+How can ALFRED help to achieve the goal of adding to the user interface?
+
+As the user goal, ALFRED provides the user with the ability to find the users and their personal data. The user is then informed about the information, and the data has an added benefit for the user. ALFRED is also used for the data to be added, and it is also used for the user to use ALFRED to connect to the data.
+
+Add",Social groups,3,Older Person,"['T51', 'T52', 'T54']",UC11
+US071,"* 1. What is the scope of the project?
+* 2. What are the steps needed to achieve the goal?
+* 3. What is the goal of the User Story?
+
+Generate a new User Story:
+* 1. What are the steps needed to achieve the goal?
+* 2. What are the steps needed to achieve the goal?
+
+Generate a new User Story:
+* 1. What is the scope of the project?
+* 2. What are the steps needed to achieve the goal?
+* 3. What are the steps needed to achieve the goal?
+
+Generate a new User Story:
+* 1. What is the scope of the project",Contact people,4,Older Person,"['T43', 'T51']",UC11
+US072,As an older person I would like to use ALFRED to learn about art expositions or a museum,Cultural events,2,Older Person,"['T44', 'T52']",UC22
+US073,As an older person I would like to use ALFRED to learn about all the social activities that are organized in my neighborhood,Social activities,2,Older Person,"['T52', 'T53', 'T54']",UC13
+US074,"As an older person I would like to use ALFRED to get a personalized invitation to a social event, so it motivates more to go",Personalized invitations,2,Older Person,"['T52', 'T54']",UC13
+US075,As an older person I would like to use ALFRED to navigate to an event or concert and help me when I am lost,Navigation I,2,Older Person,"['T32', 'T43', 'T52', 'T54']",UC32
+US076,As an older person I would like to use ALFRED to help me navigate despite my mild cognitive impairments,Navigation II,3,Older Person,"['T32', 'T61']",UC32
+US077,As an older person I would like to be able to pay for small amounts (for example for the restaurant at the community centre),Purchase,4,Older Person,"['T42', 'T43']",UC13
+US078,As an older person I would like to use ALFRED to organize a meeting with a group of friends at a certain place,Organize event,3,Older Person,"['T51', 'T54']",UC13
+US079,"As an older person, I would like to play online games together with other users",Online Games with Others,3,Older Person,"['T72', 'T73']",UC33
+US080,As an older person I would like to get suggestions for sports classes in my neighbourhood,Sports Classes in my Neighbourhood,2,Older Person,"['T51', 'T54']",UC13
+US081,"As an older person I would like ALFRED to enable me to have face to face contacts as well, not just virtual contacts over ALFRED",Human Contact,2,Older Person,"['T43', 'T54']",UC13
+US082,"As an older person, I would like to help me to control my body weight",Control of Body Weight,3,Older Person,['T61'],UC14
+US083,"Lets Start
+
+About This Project
+
+The project was created as a single project, developed by 4 different individuals 3 from ALFRED (Alfons Gerves, Albert Senebreu, Robert J. Fiske), 3 from ALFRED (Alfons, Albert, Robert), and 3 from FISSEK (Felipe, Diego, Francisco). The project started from the question: ""Who can I use?"".
+
+It began in 2016 with Alfons ""I want to use ALFRED 4 years from now"" and was further refined with Albert ""can we use ALFRED in 2025"" and Robert ""can we",Easy Contact with Caregivers,3,Older Person,['T43'],UC12
+US084,As an older person I would like to would like to decide who has access to my vital data,Access to Vital Data I,1,Older Person,"['T31', 'T62']",UC14
+US085,As a medical caregiver I would like to be sure that the user can decide who has access to her data,Access to Vital Data II,1,Older Person,"['T31', 'T61']",UC14
+US086,"As an older person, I would like the wearables with integrated sensors to look good and not to be stigmatizing",Wearable sensors,3,Older Person,['T62'],UC14
+US087,"As an older person, I would like to see my vital parameters myself on the phone",Vital parameters on Phone,1,Older Person,['T62'],UC14
+US088,"As an older person, I would like the ALFRED shirt to look good",T-Shirt I,3,Older Person,['T62'],UC14
+US089,"As an older person, I would like the ALFRED shirt has to be non stigmatizing",T-Shrit II,3,Older Person,['T62'],UC14
+US098,"As an older person, I would like ALFRED to give me goals and missions that encourage me to do new activities and exercises and to go out",Motivation of New Activities,1,Older Person,"['T54', 'T72']",UC24
+US099,"As an older person, I would like ALFRED to set limits in the games duration as I get bored easily",Limited Serious Games duration,3,Older Person,"['T71', 'T72']",UC15
+US100,"As an older person, I would like to play games where I can use my imagination",Use of Imagination,3,Older Person,"['T71', 'T72']",UC15
+US101,"As an older person, I would like to do guided exercises with ALFRED ALFRED should also use sensors to capture health data while I am doing exercises",Use of Health Data in Serious Games,2,Older Person,"['T61', 'T62', 'T71', 'T72']",UC15
+US102,"As an older person, I would like to have games that include my favourite sports (swimming, badminton, mountaineering, tennis, skiing, music…)",Games for Interests,2,Older Person,"['T34', 'T71', 'T72']",UC24
+US103,"As an older person, I would like to receive suggestions about local sport classes",Suggestions for Sports,2,Older Person,"['T52', 'T54']",UC13
+US104,"As an older person, I would like ALFRED to remind me to keep a good body posture",Good Posture,1,Older Person,"['T61', 'T62']",UC24
+US106,"As an older person, I would like to receive specific tips how to reduce my health impairments without medication (for instance, go for more walks and eat healthier)",Tips for healthy lifestyle,3,Older Person,"['T43', 'T61']",UC1
+US107,"As an older person, I would like to have some games that show me how good my memory and physical health is",Evaluating Games,2,Older Person,"['T71', 'T72']",UC24
+US108,"As an older person, I would like to have training for specific muscle groups",Training for Muscles I,3,Older Person,"['T71', 'T72']",UC22
+US110,"As an older person, I would like to be able to see my training performance",Results of exercise,3,Older Person,"['T61', 'T64']",UC14
+US111,"As an older person, I would like ALFRED to help to motivate me during the week to do exercise that should change daily, as the constant change motivates me",Changing Daily exercise,3,Older Person,"['T44', 'T61', 'T71', 'T72']",UC15
+US113,"As an older person I would like to games that require the combination of mental and physical exercise, such as opposing motion exercises of the arms and legs",Varied exercise II,2,Older Person,"['T61', 'T71', 'T72']",UC15
+US119,"As a developer, I want to present my app to as many people as possible",Clientele,3,Developer,"['T94', 'T95']",UC41
+US120,"As a developer, I want the accounting to be as simple and clear as possible",Accounting,3,Developer,['T95'],UC41
+US121,"As a developer, I want to easily create and to maintain my apps within the market place",Manage Apps,3,Developer,['T95'],UC41
+US122,"As a developer, I want to enable customers to provide feedback about my App and need an easy way to watch this feedback",Feedback,3,Developer,['T95'],UC41
+US123,"As a developer, I need an easy way to manage the pricing modality of my Apps",Pricing Modality,4,Developer,['T95'],UC41
+US124,"As a developer, I need the API to be well-defined and well-documented",API Documentation,1,Developer,"['T94', 'T96']",UC41
+US125,"As a developer, I need support in order to develop Apps (eg tools, examples, tutorials, etc)",Development Support,1,Developer,"['T94', 'T95']",UC41
+US126,"As a developer, I need to know the fees the provider of the market place charges for using the platform",Fees,4,Developer,['T95'],UC41
+US127,"As a developer, I need to be notified as soon as possible when the state of any of my Apps changes (eg during review process)",App Status,3,Developer,['T95'],UC41
+US128,"As a developer, I need detailed information of what happened when my App crashes on the user’s device",Crash Details,4,Developer,['T94'],UC41
+US129,"As a developer, I want to present my App in several ways (eg description, screenshots, videos, etc)",Marketing,3,Developer,"['T94', 'T95']",UC41
+US130,"As a developer, I want to be able to design my App on my own – though there will be a few rules I have to stand to",App Design,3,Developer,"['T95', 'T96']",UC41
+US131,"As a developer, I need an easy way to define questions (or actions) the user can ask and perform",Usability,1,Developer,['T41'],UC41
+US132,"As a developer, I need my App to be granted access to several operating system features (eg positioning, the microphone, web access, etc)",Device Functions,2,Developer,"['T31', 'T32']",UC41
+US133,"As a developer, I want the API components to be on a high level so that I don’t have to deal with their details",High Level API,2,Developer,"['T31', 'T32', 'T33', 'T34']",UC41
+US134,"As a developer, I need an easy way to read data from health sensors the user is wearing",Sensor Access,2,Developer,['T31'],UC41
+US135,"As a developer for serious games, I need to be able to take control over some functions to provide the desired user experience (eg full screen drawing, responding to touch inputs, etc)",Game Abilities,3,Developer,['T74'],UC41
+US136,"As a developer, I want to provide an easy way to manage the user settings",User Settings,3,Developer,"['T31', 'T34']",UC41
+US137,"As a developer, I want the ALFRED API to reduce the work to achieve my goals",API Assistance,2,Developer,"['T31', 'T32', 'T33', 'T34']",UC41

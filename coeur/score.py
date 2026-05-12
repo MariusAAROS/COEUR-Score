@@ -15,6 +15,9 @@ from bert_score import BERTScorer
 import mauve
 from sklearn.manifold import Isomap
 from sklearn.cluster import KMeans, AgglomerativeClustering, SpectralClustering
+from collections import Counter
+from matplotlib import pyplot as plt
+from sentence_transformers import SentenceTransformer
 
 class Coeur:
     def __init__(self, model_name: str = "bert-base-uncased", 
@@ -26,10 +29,12 @@ class Coeur:
                  batch_size: int = 128,
                  pca_components: int = 50,
                  non_linear_components: int = 3,
+                 penalize_duplicates: bool = False,
                  random_state: int = 56):
         self.model_name = model_name
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name)
+        self.embedder = SentenceTransformer("all-mpnet-base-v2")
         self.X = None
         self.X_hat = None
         self.stemming = stemming
@@ -40,6 +45,8 @@ class Coeur:
 
         self.pca_components = pca_components
         self.non_linear_components = non_linear_components
+
+        self.penalize_duplicates = penalize_duplicates
 
         self.random_state = random_state
         self.set_global_seed(random_state)
@@ -289,9 +296,9 @@ class Coeur:
             rv.plot(self.X_hat)
 
     def experimental_score_coherence(self, clusterers = None, unwind: bool = False, highlight: bool = True):
-        rs = CohesionScore(lemmatization=self.lemmatization, stemming=self.stemming,
+        rs = CohesionScore(embedder=self.embedder, lemmatization=self.lemmatization, stemming=self.stemming,
                       remove_stopwords=self.remove_stopwords, include_ac=self.include_ac,
-                      remove_re_se_stopwords=self.remove_re_se_stopwords,
+                      remove_re_se_stopwords=self.remove_re_se_stopwords, penalize_duplicates=self.penalize_duplicates,
                       random_state=self.random_state)
         if unwind:
             X_hat_current = rs.unwind_ac(self.X_hat)
@@ -354,15 +361,13 @@ class Coeur:
         n_epics = B["epic"].nunique()
         if sigma == "auto":
             sigma = "ROUGE-2 Precision"
-        else:
-            raise NotImplementedError("Custom sigma is not implemented yet.")
         if phi == "auto":
             phi = SpectralClustering(n_clusters=n_epics, random_state=self.random_state)
         if psi == "auto":
             psi = "adjusted_mutual_info"
-        coh_scorer = CohesionScore(clusterer=phi, lemmatization=self.lemmatization, stemming=self.stemming,
+        coh_scorer = CohesionScore(embedder=self.embedder, clusterer=phi, lemmatization=self.lemmatization, stemming=self.stemming,
                     remove_stopwords=self.remove_stopwords, include_ac=self.include_ac,
-                    remove_re_se_stopwords=self.remove_re_se_stopwords,
+                    remove_re_se_stopwords=self.remove_re_se_stopwords, penalize_duplicates=self.penalize_duplicates,
                     random_state=self.random_state)
         
         exh_scorer = ExhaustivenessScore(tokenizer=self.tokenizer, model=self.model, include_ac=self.include_ac,
@@ -370,8 +375,11 @@ class Coeur:
                     remove_re_se_stopwords=self.remove_re_se_stopwords,
                     stemming=self.stemming, lemmatization=self.lemmatization,
                     random_state=self.random_state)
-        
-        coh = coh_scorer.fit(B)[psi]
+        if n_epics <= len(B) - 1 and n_epics > 2:
+            coh = coh_scorer.fit(B)[psi]
+        else:
+            print("Warning: Not enough data to compute cohesion properly. Setting cohesion to 0.0")
+            coh = 0.0  # Not enough data to compute cohesion properly
         if l == "s":
             exh_subscores = []
             stories = B["user_story"].tolist()
@@ -397,3 +405,245 @@ class Coeur:
             raise ValueError("l must be one of 's' (story-wise), 'e' (epic-wise), or 'b' (backlog-wise)")
         coeur = lmbd * exh + (1 - lmbd) * coh
         return {"COEUR": coeur, "Cohesion": coh, "Exhaustiveness": exh}
+    
+    def explain(self, R: str, B: pd.DataFrame, l="s", lmbd=0.5, sigma="auto", psi="auto", phi="auto", plot: bool = False):
+        n_epics = B["epic"].nunique()
+        if sigma == "auto":
+            sigma = "ROUGE-2 Precision"
+        if phi == "auto":
+            phi = SpectralClustering(n_clusters=n_epics, random_state=self.random_state)
+        if psi == "auto":
+            psi = "adjusted_mutual_info"
+            
+        # Initialize scorers
+        coh_scorer = CohesionScore(embedder=self.embedder, clusterer=phi, lemmatization=self.lemmatization, stemming=self.stemming,
+                    remove_stopwords=self.remove_stopwords, include_ac=self.include_ac,
+                    remove_re_se_stopwords=self.remove_re_se_stopwords, penalize_duplicates=self.penalize_duplicates,
+                    random_state=self.random_state)
+        
+        exh_scorer = ExhaustivenessScore(tokenizer=self.tokenizer, model=self.model, include_ac=self.include_ac,
+                    remove_stopwords=self.remove_stopwords,
+                    remove_re_se_stopwords=self.remove_re_se_stopwords,
+                    stemming=self.stemming, lemmatization=self.lemmatization,
+                    random_state=self.random_state)
+
+        # Get explanations
+        coh_results = coh_scorer.explain(B, plot=False)
+        exh_results = exh_scorer.explain(R, B, plot=False)
+        
+        # Process Cohesion
+        loo_ami_scores = coh_results["loo_ami_scores"]
+        mean_ami = np.mean(loo_ami_scores)
+        
+        disagreement_indices = coh_results["disagreement_indices"]
+        disagreement_mass = coh_results["disagreement_mass"]
+        
+        flat_pwd = []
+        for i, j in disagreement_indices:
+            flat_pwd.append(i)
+            flat_pwd.append(j)
+        
+        counter = Counter(flat_pwd)
+        # max_freq = max(counter.values()) if counter.values() else 1
+        disagreement_freq = {idx: freq / len(B) for idx, freq in counter.items()}
+        
+        # Process Exhaustiveness
+        story_subscores = exh_results["story_subscores"]
+        exh_values = [s[sigma] for s in story_subscores]
+        mean_exh = np.mean(exh_values)
+        
+        # Identify Issues
+        stories = B["user_story"].tolist()
+        epics = B["epic"].tolist()
+        n = len(stories)
+        
+        problematic_stories = []
+        
+        for i in range(n):
+            # Cohesion Issue
+            has_disagreement_issue = disagreement_freq.get(i, 0) > disagreement_mass
+            has_ami_issue = loo_ami_scores[i] >= mean_ami
+            has_coh_issue = has_disagreement_issue or has_ami_issue
+            
+            # Exhaustiveness Issue
+            has_exh_issue = exh_values[i] < mean_exh
+            
+            if has_coh_issue or has_exh_issue:
+                issue_type = []
+                if has_coh_issue:
+                    issue_type.append("Cohesion")
+                if has_exh_issue:
+                    issue_type.append("Exhaustiveness")
+                
+                problematic_stories.append({
+                    'index': i,
+                    'epic': epics[i],
+                    'user_story': stories[i],
+                    'issues': issue_type,
+                    'coh_score': loo_ami_scores[i],
+                    'exh_score': exh_values[i]
+                })
+
+        if plot:
+            # Calculate dynamic figure height
+            base_height = 10
+            cards_per_row = 2
+            story_rows = max(1, (len(problematic_stories) + cards_per_row - 1) // cards_per_row) if problematic_stories else 0
+            dashboard_height = max(6, 5 + story_rows * 2.2)
+            total_height = base_height + dashboard_height
+            
+            fig = plt.figure(figsize=(16, total_height))
+            dashboard_ratio = dashboard_height / total_height
+            top_plots_ratio = base_height / total_height
+            
+            gs = fig.add_gridspec(2, 1, height_ratios=[top_plots_ratio, dashboard_ratio], hspace=0.05)
+            
+            # Top Plot: Scatter of Cohesion vs Exhaustiveness
+            ax0 = fig.add_subplot(gs[0])
+            
+            colors = []
+            for i in range(n):
+                has_disagreement_issue = disagreement_freq.get(i, 0) > disagreement_mass
+                has_ami_issue = loo_ami_scores[i] >= mean_ami
+                has_coh_issue = has_disagreement_issue or has_ami_issue
+                has_exh_issue = exh_values[i] < mean_exh
+                
+                if has_coh_issue and has_exh_issue:
+                    colors.append('#ff4757') # Red - Both
+                elif has_coh_issue:
+                    colors.append('#ffa502') # Orange - Cohesion
+                elif has_exh_issue:
+                    colors.append('#1e90ff') # Blue - Exhaustiveness
+                else:
+                    colors.append('#2ed573') # Green - Good
+            
+            ax0.scatter(exh_values, loo_ami_scores, c=colors, alpha=0.7, s=80, edgecolors='white')
+            
+            # Add thresholds
+            ax0.axvline(x=mean_exh, color='#1e90ff', linestyle='--', label=f'Avg Exh: {mean_exh:.3f}')
+            ax0.axhline(y=mean_ami, color='#ffa502', linestyle='--', label=f'Avg Coh Impact: {mean_ami:.3f}')
+            
+            ax0.set_xlabel(f'Exhaustiveness ({sigma}) - Higher is Better', fontsize=12)
+            ax0.set_ylabel('Cohesion Impact (LOO-AMI) - Lower is Better', fontsize=12)
+            ax0.set_title('User Story Quality: Cohesion vs Exhaustiveness', fontsize=16, fontweight='bold')
+            
+            custom_legend_lines = [
+                # user story issue markers
+                plt.Line2D([0], [0], marker='o', color='w', label='Both Issues', markerfacecolor='#ff4757', markersize=10),
+                plt.Line2D([0], [0], marker='o', color='w', label='Cohesion Issue', markerfacecolor='#ffa502', markersize=10),
+                plt.Line2D([0], [0], marker='o', color='w', label='Exhaustiveness Issue', markerfacecolor='#1e90ff', markersize=10),
+                plt.Line2D([0], [0], marker='o', color='w', label='Good Story', markerfacecolor='#2ed573', markersize=10),
+                # threshold lines
+                plt.Line2D([0], [0], color='#1e90ff', lw=2, linestyle='--', label=f'Avg Exh: {mean_exh:.3f}'),
+                plt.Line2D([0], [0], color='#ffa502', lw=2, linestyle='--', label=f'Avg Coh Impact: {mean_ami:.3f}'),
+            ]
+            ax0.legend(custom_legend_lines, [line.get_label() for line in custom_legend_lines], loc='upper right')
+            ax0.grid(True, alpha=0.3)
+            ax0.set_facecolor('#f8f9fa')
+            
+            # Dashboard Section
+            ax1 = fig.add_subplot(gs[1])
+            ax1.axis('off')
+            
+            dashboard_y_max = 5 + story_rows * 1.8
+            ax1.set_xlim(0, 10)
+            ax1.set_ylim(0, dashboard_y_max)
+            
+            # Title
+            ax1.text(5, dashboard_y_max - 0.5, 'COEUR Quality Dashboard', fontsize=18, fontweight='bold', 
+                    ha='center', va='top', color='#2c3e50')
+            
+            # Summary Stats
+            total = n
+            issues = len(problematic_stories)
+            good = total - issues
+            
+            summary_y = dashboard_y_max - 1.5
+            box_width = 2.5
+            box_height = 1.0
+            
+            # Good Box
+            rect_good = plt.Rectangle((1, summary_y - box_height/2), box_width, box_height, 
+                                    facecolor='#d4edda', edgecolor='#2ed573', linewidth=2)
+            ax1.add_patch(rect_good)
+            ax1.text(1 + box_width/2, summary_y, f'✓ Good Stories\n{good}/{total}', ha='center', va='center', 
+                    fontsize=12, fontweight='bold', color='#155724')
+            
+            # Issues Box
+            rect_bad = plt.Rectangle((4, summary_y - box_height/2), box_width, box_height, 
+                                    facecolor='#f8d7da', edgecolor='#ff4757', linewidth=2)
+            ax1.add_patch(rect_bad)
+            ax1.text(4 + box_width/2, summary_y, f'⚠ Stories with Issues\n{issues}', ha='center', va='center', 
+                    fontsize=12, fontweight='bold', color='#721c24')
+            
+            # Legend for colors
+            legend_y = summary_y
+            ax1.text(7.5, legend_y + 0.3, '● Both Issues', color='#ff4757', fontweight='bold')
+            ax1.text(7.5, legend_y, '● Cohesion Issue', color='#ffa502', fontweight='bold')
+            ax1.text(7.5, legend_y - 0.3, '● Exhaustiveness Issue', color='#1e90ff', fontweight='bold')
+            
+            # Details Section
+            current_y = summary_y - 1.5
+            if problematic_stories:
+                ax1.text(5, current_y, 'Problematic User Stories', fontsize=14, fontweight='bold', 
+                        ha='center', va='center', color='#495057')
+                current_y -= 0.8
+                
+                card_width = 4.5
+                card_height = 1.4
+                start_x = 0.25
+                cols = 2
+                
+                for idx, story_data in enumerate(problematic_stories):
+                    row = idx // cols
+                    col = idx % cols
+                    x = start_x + col * (card_width + 0.5)
+                    y = current_y - row * (card_height + 0.4)
+                    
+                    # Determine color based on issues
+                    issues_list = story_data['issues']
+                    if "Cohesion" in issues_list and "Exhaustiveness" in issues_list:
+                        color = '#ff4757'
+                    elif "Cohesion" in issues_list:
+                        color = '#ffa502'
+                    else:
+                        color = '#1e90ff'
+                    
+                    card_rect = plt.Rectangle((x, y - card_height), card_width, card_height, 
+                                            facecolor='white', edgecolor=color, 
+                                            linewidth=2, alpha=0.9)
+                    ax1.add_patch(card_rect)
+                    
+                    epic_text = story_data['epic'][:30] + '...' if len(story_data['epic']) > 30 else story_data['epic']
+                    ax1.text(x + 0.1, y - 0.2, f"Epic: {epic_text}", fontsize=9, fontweight='bold', 
+                            color='#6c757d', va='top', ha='left')
+                    
+                    story_text = story_data['user_story'][:60] + '...' if len(story_data['user_story']) > 60 else story_data['user_story']
+                    ax1.text(x + 0.1, y - 0.5, story_text, fontsize=8, color='#495057', 
+                            va='top', ha='left')
+                    
+                    issue_text = " & ".join(issues_list)
+                    ax1.text(x + 0.1, y - 0.9, f"Issues: {issue_text}", 
+                            fontsize=9, fontweight='bold', color=color, va='top', ha='left')
+                    
+                    scores_text = f"Coh Impact: {story_data['coh_score']:.3f} | Exh: {story_data['exh_score']:.3f}"
+                    ax1.text(x + 0.1, y - 1.15, scores_text, fontsize=8, color='#6c757d', va='top', ha='left')
+                    
+                    ax1.text(x + card_width - 0.1, y - 0.1, f"#{story_data['index']}", 
+                            fontsize=11, fontweight='bold', color=color, 
+                            va='top', ha='right')
+            else:
+                ax1.text(5, current_y, '✓ All user stories meet COEUR quality standards!', 
+                        fontsize=16, fontweight='bold', ha='center', va='center', color='#2ed573',
+                        bbox=dict(boxstyle="round,pad=0.5", facecolor='#d4edda', edgecolor='#2ed573'))
+            
+            footer_y = 0.05
+            ax1.text(5, footer_y, 'Quality Report Generated', 
+                    fontsize=10, ha='center', va='center', color='#6c757d', style='italic')
+            plt.show()
+
+        return {
+            "cohesion_results": coh_results,
+            "exhaustiveness_results": exh_results,
+            "problematic_stories": problematic_stories
+        }

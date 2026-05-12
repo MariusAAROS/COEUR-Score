@@ -20,12 +20,23 @@ from sklearn.metrics import silhouette_score, \
                             adjusted_mutual_info_score, \
                             homogeneity_completeness_v_measure, \
                             fowlkes_mallows_score
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.pipeline import Pipeline
 from itertools import count, product
 import warnings
 
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
+from collections import Counter
+from scipy.stats import entropy
+
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.pipeline import Pipeline
+import numpy as np
 
 RE_SE_STOPWORDS = ["as", "a", "i", "want", "to", "so", "that", "i", "the", "and", 
                     "in", "is", "it", "of", "for", "on", "with", 
@@ -158,25 +169,78 @@ class CohesionScore(CohesionAbstract):
     def __init__(self, embedder = None, clusterer = None,
                  stemming: bool = False, lemmatization: bool = False, 
                  remove_stopwords: bool = False, remove_re_se_stopwords: bool = False,
-                 include_ac: bool = False, random_state: int = 56):
+                 include_ac: bool = False, random_state: int = 56, penalize_duplicates: bool = True):
         super().__init__(embedder=embedder, clusterer=clusterer, 
                          stemming=stemming, lemmatization=lemmatization,
                          remove_stopwords=remove_stopwords, remove_re_se_stopwords=remove_re_se_stopwords,
                          include_ac=include_ac, random_state=random_state)
+        self.penalize_duplicates = penalize_duplicates
+        self.penalities = []
+        self.diversity_factors = []
 
     def compute_metrics(self, data):
         mask = data["cluster_label"] != -1
         lbls_core = data["cluster_label"][mask]
         epics_core = data["epic_label"][mask]
         emb_core = np.array(data["story_embedding"].tolist())[mask]
-        results = {}
-        if len(np.unique(lbls_core)) < 2:
-            print(f" Not enough clusters (>=2) after removing noise to compute metrics.")
-            return results
-        if emb_core.shape[0] < 2:
-            print(f" Not enough samples after removing noise to compute metrics.")
-            return results
 
+        stories_core = data["story_text"][mask] if "story_text" in data else lbls_core 
+        
+        # Prepare preprocessing tools for word-level diversity
+        en_stop_words = set(stopwords.words('english'))
+        fr_stop_words = set(stopwords.words('french'))
+        stop_words = en_stop_words.union(fr_stop_words)
+        stemmer = PorterStemmer()
+        lemmatizer = WordNetLemmatizer()
+        
+        def get_wordnet_pos(word):
+            """Map POS tag to first character used by WordNetLemmatizer"""
+            tag = pos_tag([word])[0][1][0].upper()
+            tag_dict = {"J": wordnet.ADJ,
+                        "N": wordnet.NOUN,
+                        "V": wordnet.VERB,
+                        "R": wordnet.ADV}
+            return tag_dict.get(tag, wordnet.NOUN)
+        
+        def calculate_diversity_factor(group_stories):
+            """Calculate diversity as min of story-level and word-level diversity."""
+            if len(group_stories) <= 1: 
+                return 1.0
+            
+            # Story-level diversity: penalizes exact duplicates
+            n_unique_stories = len(set(group_stories))
+            n_total_stories = len(group_stories)
+            story_diversity = n_unique_stories / n_total_stories
+            
+            # Word-level diversity: penalizes vocabulary redundancy
+            all_words = []
+            for story in group_stories:
+                tokens = word_tokenize(str(story).lower())
+                if self.remove_stopwords:
+                    filtered_tokens = [word for word in tokens if word.isalnum() and word not in stop_words]
+                else:
+                    filtered_tokens = [word for word in tokens if word.isalnum()]
+                if self.remove_re_se_stopwords:
+                    filtered_tokens = [word for word in filtered_tokens if word not in RE_SE_STOPWORDS]
+                if self.lemmatization:
+                    filtered_tokens = [lemmatizer.lemmatize(word, get_wordnet_pos(word)) for word in filtered_tokens]
+                if self.stemming:
+                    filtered_tokens = [stemmer.stem(word) for word in filtered_tokens]
+                all_words.extend(filtered_tokens)
+            
+            if len(all_words) == 0:
+                return story_diversity
+                
+            n_unique_words = len(set(all_words))
+            n_total_words = len(all_words)
+            word_diversity = n_unique_words / n_total_words
+            
+            # Use the stricter of the two
+            return min(story_diversity, word_diversity)
+
+        results = {}
+    
+        # Metrics Calculation
         results["rand_index"] = rand_score(epics_core, lbls_core)
         results["adjusted_rand_index"] = adjusted_rand_score(epics_core, lbls_core)
         results["normalized_mutual_info"] = normalized_mutual_info_score(epics_core, lbls_core)
@@ -187,7 +251,6 @@ class CohesionScore(CohesionAbstract):
         results["calinski_harabasz"] = calinski_harabasz_score(emb_core, lbls_core)
         results["davies_bouldin"] = davies_bouldin_score(emb_core, lbls_core)
 
-
         unique, counts = np.unique(data["cluster_label"], return_counts=True)
         has_noise = -1 in unique
         n_clusters = unique.size - (1 if has_noise else 0)
@@ -197,8 +260,273 @@ class CohesionScore(CohesionAbstract):
             "Number of clusters": n_clusters,
             "Noise points": counts[unique.tolist().index(-1)] if has_noise else 0
         }
+
+        # Apply diversity penalty to selected metrics
+        if self.penalize_duplicates:
+            # Option 1: Per-epic diversity factor (current)
+            # diversity_factors = []
+            # for epic in np.unique(epics_core):
+            #     epic_mask = epics_core == epic
+            #     diversity_factors.append(calculate_diversity_factor(data["user_story"][epic_mask].values))
+            # penalty_multiplier = np.mean(diversity_factors)
+            
+            # Option 2: Global diversity factor (commented out)
+            global_diversity = calculate_diversity_factor(data["user_story"].values)
+            diversity_factors = [global_diversity]
+            penalty_multiplier = global_diversity
+            
+            self.diversity_factors.append(diversity_factors)
+            self.penalities.append(penalty_multiplier)
+            
+            results["silhouette"] = results["silhouette"]
+            # results["adjusted_mutual_info"] = min(results["adjusted_mutual_info"], penalty_multiplier)
+            results["adjusted_mutual_info"] = 2 * results["adjusted_mutual_info"] * penalty_multiplier / (results["adjusted_mutual_info"] + penalty_multiplier)
+            results["semantic_diversity_multiplier"] = penalty_multiplier
+
         return results
 
+    def explain(self, X, plot: bool = False):
+        data = self.preprocess(X)
+        y = data["epic_label"].values
+        y_hat = data["cluster_label"].values
+
+        # Compute disagreement mass
+        disagreement = 0
+        disagreement_indices = []
+        n = len(y)
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                if (y[i] == y[j]) != (y_hat[i] == y_hat[j]):
+                    disagreement += 1
+                    disagreement_indices.append((i, j))
+
+        disagreement_mass = disagreement / (n * (n - 1) / 2)
+
+        # LOO-AMI
+        loo_ami_scores = []
+        for i in range(n):
+            y_loo = np.delete(y, i)
+            y_hat_loo = np.delete(y_hat, i)
+            ami_loo = adjusted_mutual_info_score(y_loo, y_hat_loo)
+            loo_ami_scores.append(ami_loo)
+
+        if plot:
+            # Calculate quality metrics for each story
+            flat_pwd = []
+            for i, j in disagreement_indices:
+                flat_pwd.append(i)
+                flat_pwd.append(j)
+
+            counter = Counter(flat_pwd)
+            # max_freq = max(counter.values()) if counter.values() else 1
+            disagreement_freq = {idx: freq / len(X) for idx, freq in counter.items()}
+            mean_ami = np.mean(loo_ami_scores)
+            
+            # Calculate number of problematic stories for dynamic sizing
+            problematic_count = 0
+            for i in range(n):
+                has_disagreement_issue = disagreement_freq.get(i, 0) > disagreement_mass
+                has_ami_issue = loo_ami_scores[i] >= mean_ami
+                if has_disagreement_issue or has_ami_issue:
+                    problematic_count += 1
+            
+            # Dynamic figure sizing based on number of problematic stories
+            base_height = 6  # Reduced base height for more condensed top plots
+            cards_per_row = 2
+            card_rows = max(1, (problematic_count + cards_per_row - 1) // cards_per_row) if problematic_count > 0 else 1
+            dashboard_height = max(4, 2 + card_rows * 1.5)  # Dynamic dashboard height
+            total_height = base_height + dashboard_height
+            
+            # Create figure with subplots
+            fig = plt.figure(figsize=(16, total_height))
+            dashboard_ratio = dashboard_height / total_height
+            top_plots_ratio = base_height / total_height
+            gs = fig.add_gridspec(3, 2, height_ratios=[top_plots_ratio/2, top_plots_ratio/2, dashboard_ratio], hspace=0.15, wspace=0.2)
+            
+            # First subplot - LOO-AMI
+            ax0 = fig.add_subplot(gs[0, :])
+            ami_colors = ['#ff6b6b' if score >= mean_ami else '#51cf66' for score in loo_ami_scores]
+            ax0.bar(range(n), loo_ami_scores, color=ami_colors, alpha=0.8, edgecolor='white', linewidth=0.5)
+            ax0.set_title('Leave-One-Out Adjusted Mutual Information (LOO-AMI) Scores', 
+                        fontsize=14, fontweight='bold', pad=20)
+            ax0.set_ylabel('LOO-AMI Score', fontsize=12)
+            ax0.axhline(y=mean_ami, color='#e03131', linestyle='--', linewidth=2, 
+                    label=f'Average: {mean_ami:.3f}')
+            ax0.legend(fontsize=11)
+            ax0.grid(True, alpha=0.3)
+            ax0.set_facecolor('#f8f9fa')
+            
+            # Second subplot - Disagreement frequencies
+            ax1 = fig.add_subplot(gs[1, :])
+            indices = list(counter.keys())
+            frequencies = list(counter.values())
+            normalized_frequencies = [freq / len(X) for freq in frequencies]
+            colors = ['#ff6b6b' if nfreq > disagreement_mass else '#51cf66' for nfreq in normalized_frequencies]
+            
+            ax1.bar(indices, normalized_frequencies, color=colors, alpha=0.8, 
+                        edgecolor='white', linewidth=0.5)
+            ax1.axhline(y=disagreement_mass, color='#e03131', linestyle='--', linewidth=2,
+                    label=f'Average: {disagreement_mass:.3f}')
+            ax1.legend(fontsize=11)
+            ax1.set_xlabel('User Story ID', fontsize=12)
+            ax1.set_ylabel('Normalized Frequency', fontsize=12)
+            ax1.set_title('Frequency of Disagreements by Index', fontsize=14, fontweight='bold', pad=20)
+            ax1.grid(True, alpha=0.3)
+            ax1.set_facecolor('#f8f9fa')
+            
+            # Third subplot - Quality Report Dashboard
+            ax2 = fig.add_subplot(gs[2, :])
+            ax2.axis('off')
+            
+            # Prepare quality data
+            quality_data = []
+            for i in range(n):
+                has_disagreement_issue = disagreement_freq.get(i, 0) > disagreement_mass
+                has_ami_issue = loo_ami_scores[i] >= mean_ami
+                
+                if has_disagreement_issue and has_ami_issue:
+                    status = 'Both Issues'
+                    color = '#ff4757'
+                    icon = '⚠'
+                elif has_disagreement_issue:
+                    status = 'Disagreement Issue'
+                    color = '#ff6b6b'
+                    icon = '●'
+                elif has_ami_issue:
+                    status = 'LOO-AMI Issue'
+                    color = '#ffa502'
+                    icon = '▲'
+                else:
+                    status = 'Good Quality'
+                    color = '#2ed573'
+                    icon = '✓'
+                
+                quality_data.append({
+                    'index': i,
+                    'epic': data.iloc[i]['epic'],
+                    'user_story': data.iloc[i]['user_story'],
+                    'status': status,
+                    'color': color,
+                    'icon': icon,
+                    'disagreement_freq': disagreement_freq.get(i, 0),
+                    'ami_score': loo_ami_scores[i]
+                })
+            
+            # Create dashboard layout - dynamic sizing
+            ax2.set_xlim(0, 10)
+            dashboard_y_max = 4 + card_rows * 1.5  # Increased base space for better bottom margin
+            ax2.set_ylim(0, dashboard_y_max)
+            
+            # Title
+            ax2.text(5, dashboard_y_max - 0.5, 'User Story Quality Dashboard', fontsize=18, fontweight='bold', 
+                    ha='center', va='top', color='#2c3e50')
+            
+            # Summary stats
+            total_stories = len(quality_data)
+            good_stories = sum(1 for item in quality_data if item['status'] == 'Good Quality')
+            defective_stories = total_stories - good_stories
+            
+            # Summary boxes - adjusted positioning
+            summary_y = dashboard_y_max - 1.5
+            box_width = 2
+            box_height = 0.8
+            
+            # Good stories box
+            good_rect = plt.Rectangle((1, summary_y - box_height/2), box_width, box_height, 
+                                    facecolor='#d4edda', edgecolor='#2ed573', linewidth=2)
+            ax2.add_patch(good_rect)
+            ax2.text(2, summary_y, f'✓ Good\n{good_stories}', ha='center', va='center', 
+                    fontsize=12, fontweight='bold', color='#155724')
+            
+            # Defective stories box
+            defect_rect = plt.Rectangle((4, summary_y - box_height/2), box_width, box_height, 
+                                    facecolor='#f8d7da', edgecolor='#ff4757', linewidth=2)
+            ax2.add_patch(defect_rect)
+            ax2.text(5, summary_y, f'⚠ Issues\n{defective_stories}', ha='center', va='center', 
+                    fontsize=12, fontweight='bold', color='#721c24')
+            
+            # Quality rate box
+            quality_rate = (good_stories / total_stories) * 100
+            rate_rect = plt.Rectangle((7, summary_y - box_height/2), box_width, box_height, 
+                                    facecolor='#cce5ff', edgecolor='#007bff', linewidth=2)
+            ax2.add_patch(rate_rect)
+            ax2.text(8, summary_y, f'% Quality\n{quality_rate:.1f}%', ha='center', va='center', 
+                    fontsize=12, fontweight='bold', color='#004085')
+            
+            # Story details section - adjusted positioning
+            details_start_y = summary_y - 1.5
+            ax2.text(5, details_start_y, 'Story Quality Details', fontsize=14, fontweight='bold', 
+                    ha='center', va='center', color='#495057')
+            
+            # Filter and display problematic stories
+            problematic_stories = [item for item in quality_data if item['status'] != 'Good Quality']
+            
+            if problematic_stories:
+                # Display all problematic stories in a grid - no limit
+                stories_to_show = problematic_stories
+                cols = 2
+                
+                card_width = 4.5
+                card_height = 1.2
+                start_x = 0.25
+                start_y = details_start_y - 0.8
+                
+                for idx, story_data in enumerate(stories_to_show):
+                    row = idx // cols
+                    col = idx % cols
+                    x = start_x + col * (card_width + 0.5)
+                    y = start_y - row * (card_height + 0.3)
+                    
+                    # Create card background
+                    card_rect = plt.Rectangle((x, y - card_height), card_width, card_height, 
+                                            facecolor='white', edgecolor=story_data['color'], 
+                                            linewidth=2, alpha=0.9)
+                    ax2.add_patch(card_rect)
+                    
+                    # Epic name (truncated)
+                    epic_text = story_data['epic'][:30] + '...' if len(story_data['epic']) > 30 else story_data['epic']
+                    ax2.text(x + 0.1, y - 0.2, f"Epic: {epic_text}", fontsize=10, fontweight='bold', 
+                            color='#6c757d', va='top', ha='left')
+                    
+                    # User story (truncated)
+                    story_text = story_data['user_story'][:60] + '...' if len(story_data['user_story']) > 60 else story_data['user_story']
+                    ax2.text(x + 0.1, y - 0.5, story_text, fontsize=9, color='#495057', 
+                            va='top', ha='left', wrap=True)
+                    
+                    # Status with icon
+                    ax2.text(x + 0.1, y - 0.9, f"{story_data['icon']} {story_data['status']}", 
+                            fontsize=10, fontweight='bold', color=story_data['color'], va='top', ha='left')
+                    
+                    # Story index
+                    ax2.text(x + card_width - 0.1, y - 0.1, f"#{story_data['index']}", 
+                            fontsize=12, fontweight='bold', color=story_data['color'], 
+                            va='top', ha='right')
+            else:
+                # All stories are good
+                good_y_pos = details_start_y - 1
+                ax2.text(5, good_y_pos, '✓ All user stories have good quality!', fontsize=16, 
+                        fontweight='bold', ha='center', va='center', color='#2ed573',
+                        bbox=dict(boxstyle="round,pad=0.5", facecolor='#d4edda', edgecolor='#2ed573'))
+            
+            # Add footer note - dynamic positioning
+            footer_y = 0.2  # Increased margin from bottom
+            if problematic_stories:
+                footer_text = f'Displaying all {len(problematic_stories)} stories with quality issues'
+            else:
+                footer_text = 'All user stories meet quality standards'
+                
+            ax2.text(5, footer_y, footer_text, 
+                    fontsize=10, ha='center', va='center', color='#6c757d', style='italic')
+            
+            plt.show()
+
+        return {
+            "disagreement_mass": disagreement_mass,
+            "disagreement_indices": disagreement_indices,
+            "loo_ami_scores": loo_ami_scores
+        }
+        
     def fit(self, X):
         data = self.preprocess(X)
         metrics = self.compute_metrics(data)

@@ -1,0 +1,111 @@
+id,user_story,title,priority,user_group,tasks,epic
+US001,As an older person I would like ALFRED to allow me to search for information about local cemeteries,Personal data,2,Older Person,"['T31', 'T32', 'T34']",UC11
+US002,As an older person I would like to ALFRED use my mobile phone to look up new recipes,Speech interaction,1,Older Person,"['T32', 'T41', 'T42', 'T44']",UC12
+US003,As an older person I would like use only well-visible buttons,Buttons,2,Older Person,"['T32', 'T33', 'T41']",UC31
+US004,As an older person I would like to use ALFRED for navigation,Speech interaction,1,Older Person,"['T32', 'T33', 'T41']",UC12
+US005,As an older person I would like to be able ALFRED the older person to help me with my daily tasks,Control,3,Older Person,['T51'],UC11
+US006,As an older person I would like to be able to send and receive messages anonymously,Privacy,2,Older Person,"['T34', 'T51']",UC11
+US007,As an older person I would like ALFRED to allow me to book time off weekends,Installation,5,Older Person,"['T42', 'T44']",UC11
+US008,As an older person I would like to receive support to use my physical features instead of my virtual one,Wearable I,2,Older Person,"['T32', 'T42']",UC21
+US009,As an Older person I would like to be able to access the ALFRED app in my home,On mobile support,4,Older Person,"['T32', 'T43']",UC21
+US010,As an older person I would like have ALFRED on a bracelet or a necklace so I can always wear him with me,Wearable II,4,Older Person,"['T42', 'T62']",UC32
+US011,As an older person I would like to use ALFRED to call on my loved ones,Clear instructions and Troubleshooting,4,Older Person,['T43'],UC11
+US012,"As an older person, I would like to have ALFRED speak very slowly and clearly",Clear speaking,3,Older Person,"['T41', 'T43']",UC31
+US013,As an older person I would like to have ALFRED assist me to navigate the hospital soothboard,Reaction,4,Older Person,"['T41', 'T43', 'T44']",UC12
+US014,"As an older person, I would like to get support to use ALFRED properly",Control,2,Older Person,"['T41', 'T43']",UC12
+US015,As an older person I would like ALFRED to make the ALFRED menu look nice and the results in order,Training,3,Older Person,"['T41', 'T43', 'T44', 'T51', 'T61', 'T71']",UC12
+US016,"As an older person, I would like to receive ALFRED to use at home with me",Buying,4,Older Person,['T91'],UC21
+US017,As an older person I would like to use ALFRED to navigate to important contacts of the day and to call my friends and lovers,Cost of ALFRED,4,Older Person,['T94'],UC11
+US018,"As an older person I would like to receive visual support, especially when looking at a list, map or agenda",Visual support,3,Older Person,['T43'],UC31
+US019,As an older person I would like to use ALFRED to pay for small amounts,Payments,4,Older Person,"['T42', 'T43']",UC13
+US020,As an older person I would like ALFRED to alert me about activities with high risk (eg) biking,Battery,3,Older Person,['T42'],UC21
+US021,As an older person I would like to have an app that gives me simple instructions about the daily activities,Low Battery,2,Older Person,['T42'],UC21
+US023,"As an older person, I would like ALFRED be easily adapted for user that have visual troubles",Adaptability for vision,2,Older Person,"['T34', 'T41', 'T43']",UC31
+US024,"As an older person, I would like ALFRED be easily adapted for user that have hearing troubles",Adaptability for audition,4,Older Person,"['T34', 'T41', 'T43']",UC31
+US025,"As an older person, I woule like ALFRED to repeat the last phrase",Repeat,2,Older Person,"['T34', 'T41', 'T43']",UC31
+US026,"As an older person, I would like to be able to zoom into visual content",Zoom,3,Older Person,"['T34', 'T41', 'T43']",UC31
+US027,As an Older User I woule like ALFRED to encourage me to get up and walk around,Changing demand,3,Older Person,"['T34', 'T44']",UC21
+US028,As an older person I would like to receive news about healthy food products in order to maintain a healthy living,Communication with entourage,2,Older Person,"['T41', 'T43', 'T54']",UC11
+US029,"As an older person, I would like to have video conversation with others",Video Conversation I,4,Older Person,['T43'],UC13
+US031,"As an older person, I would like ALFRED to encourage its users for real interaction between humans and not only with ICT-tools",Human Interaction,2,Older Person,"['T43', 'T52', 'T54']",UC13
+US032,"As an older person, I would like to use ALFRED to do simple home repairs and appliances such as radiator and light bulbs",Information about interesting Apps,3,Older Person,"['T41', 'T44', 'T72']",UC21
+US033,As an older person I would like to get a reminder message from ALFRED,Customizing Preferences,2,Older Person,"['T34', 'T43', 'T51']",UC21
+US035,As an older person I would like to have my data stored directly on the phone,Data storage on Phone,3,Older Person,"['T31', 'T42']",UC14
+US036,As an older person I would like to receive a wake up call from ALFRED in the morning checking on me if I am ok,Wake up call,1,Older Person,"['T43', 'T63']",UC23
+US037,As an older person I would like to receive reminders to have some sort of a routine,Agenda,3,Older Person,"['T34', 'T42', 'T43', 'T44']",UC12
+US038,As an older person I would like to receive support to use the public transport,Public transport,1,Older Person,"['T32', 'T42', 'T43']",UC32
+US039,As an older person I would like to use ALFRED for navigation,Navigation,1,Older Person,"['T32', 'T42', 'T43']",UC13
+US040,As an older person I would like to use ALFRED for touristic walks and indications with explanations on historical and cultural sights,Tourist information,3,Older Person,"['T32', 'T33', 'T42', 'T43']",UC32
+US041,As an older person I would like to receive support to have a taxi on time,Taxi,1,Older Person,"['T41', 'T43']",UC13
+US047,As an older person I would like to use ALFRED to watch movies,Media I,4,Older Person,"['T41', 'T42', 'T44']",UC31
+US048,As an older person I would like to use ALFRED to hear about the news,Media II,2,Older Person,"['T41', 'T42', 'T44']",UC31
+US049,As an older person I would like to use ALFRED to contact help in case of an emergency,Emergency I,2,Older Person,"['T42', 'T61', 'T62', 'T63']",UC32
+US051,"As an older person, I would like ALFRED to contact the nearest caregiver when I ask ALFRED for urgent help",Emergency III,3,Older Person,"['T42', 'T61', 'T62', 'T63']",UC23
+US052,As an older person I would like to receive a message when my home care nurse is on her way,Home care,4,Older Person,['T43'],UC13
+US053,As an older person I would like to receive a medicine reminder from ALFRED,Medicine,1,Older Person,"['T31', 'T43', 'T44', 'T61']",UC23
+US054,"As an older person, I would like to be able to see whether I already have taken my pills in order to avoid overdose",Pills reminder and validation,3,Older Person,"['T31', 'T43', 'T61']",UC23
+US056,As an older person I would like to use ALFRED to do my grocery shopping,Grocery Shopping,4,Older Person,"['T41', 'T44']",UC23
+US057,As an older person I would like to use ALFRED to send messages,Messages,1,Older Person,"['T33', 'T41', 'T43']",UC23
+US058,As an older person I would like to ALFRED detect falls and send an emergency to a specific contact,Fall detection,2,Older Person,"['T62', 'T63']",UC32
+US059,"As an older person, I would like to have ALFRED to suggest healthy recipes",Healthy Recipes,4,Older Person,"['T43', 'T44', 'T61']",UC23
+US060,"As an older person, I would like to ALFRED to ask spontaneous questions but it would be better to programme it during certain times of the day",Spontaneous Questions by ALFRED,3,Older Person,"['T33', 'T41', 'T43']",UC31
+US061,"As an older person, I woule like ALFRED to initiate questions, but it should be in the domains of my interest such as cinema, exhibitions, cooking",Targeted Spontaneous Questions,3,Older Person,"['T33', 'T34', 'T41', 'T43', 'T44', 'T51']",UC31
+US062,As an older person I would like to be able to call someone with ALFRED,Calls with ALFRED,1,Older Person,"['T33', 'T41', 'T43']",UC31
+US063,As an older person I would like to activate the vocal interaction mode of ALFRED by pushing a specific button,Activation of vocal interaction with ALFRED,1,Older Person,['T43'],UC31
+US064,As an older person I would like to use ALFRED on a regular basis to look at photos and to share them with others,Contacts,2,Older Person,"['T31', 'T43', 'T51']",UC12
+US065,As an older person I would like to be able to ask ALFRED about my doctor's recommendations,Agenda I,2,Older Person,"['T34', 'T41']",UC12
+US066,"As an older person, I would like to use ALFRED to call my caregiver and ask about the care facilities in my neighborhood",Agenda II,2,Older Person,"['T33', 'T34', 'T41']",UC12
+US067,As an older person I would like to use ALFRED to navigate through the older people’s social care network,Reminders I,1,Older Person,"['T43', 'T44']",UC12
+US068,As an older person I would like to receive a reminder from ALFRED on all the things I need to bring with me when I leave the house,Reminders II,3,Older Person,"['T42', 'T43']",UC23
+US070,"As an older person, I would like ALFRED to assist me in situations of need",Social groups,3,Older Person,"['T51', 'T52', 'T54']",UC11
+US071,As an older person I would like to the ALFRED application to look at a picture of the person (or of a favourite video),Contact people,4,Older Person,"['T43', 'T51']",UC11
+US072,As an older person I would like to use ALFRED to learn about art expositions or a museum,Cultural events,2,Older Person,"['T44', 'T52']",UC22
+US073,As an older person I would like to use ALFRED to learn about all the social activities that are organized in my neighborhood,Social activities,2,Older Person,"['T52', 'T53', 'T54']",UC13
+US074,"As an older person I would like to use ALFRED to get a personalized invitation to a social event, so it motivates more to go",Personalized invitations,2,Older Person,"['T52', 'T54']",UC13
+US075,As an older person I would like to use ALFRED to navigate to an event or concert and help me when I am lost,Navigation I,2,Older Person,"['T32', 'T43', 'T52', 'T54']",UC32
+US076,As an older person I would like to use ALFRED to help me navigate despite my mild cognitive impairments,Navigation II,3,Older Person,"['T32', 'T61']",UC32
+US077,As an older person I would like to be able to pay for small amounts (for example for the restaurant at the community centre),Purchase,4,Older Person,"['T42', 'T43']",UC13
+US078,As an older person I would like to use ALFRED to organize a meeting with a group of friends at a certain place,Organize event,3,Older Person,"['T51', 'T54']",UC13
+US079,"As an older person, I would like to play online games together with other users",Online Games with Others,3,Older Person,"['T72', 'T73']",UC33
+US080,As an older person I would like to get suggestions for sports classes in my neighbourhood,Sports Classes in my Neighbourhood,2,Older Person,"['T51', 'T54']",UC13
+US081,"As an older person I would like ALFRED to enable me to have face to face contacts as well, not just virtual contacts over ALFRED",Human Contact,2,Older Person,"['T43', 'T54']",UC13
+US082,"As an older person, I would like to help me to control my body weight",Control of Body Weight,3,Older Person,['T61'],UC14
+US083,As an older person I would like to receive reminders ALFRED about my appointment,Easy Contact with Caregivers,3,Older Person,['T43'],UC12
+US084,As an older person I would like to would like to decide who has access to my vital data,Access to Vital Data I,1,Older Person,"['T31', 'T62']",UC14
+US085,As a medical caregiver I would like to be sure that the user can decide who has access to her data,Access to Vital Data II,1,Older Person,"['T31', 'T61']",UC14
+US086,"As an older person, I would like the wearables with integrated sensors to look good and not to be stigmatizing",Wearable sensors,3,Older Person,['T62'],UC14
+US087,"As an older person, I would like to see my vital parameters myself on the phone",Vital parameters on Phone,1,Older Person,['T62'],UC14
+US088,"As an older person, I would like the ALFRED shirt to look good",T-Shirt I,3,Older Person,['T62'],UC14
+US089,"As an older person, I would like the ALFRED shirt has to be non stigmatizing",T-Shrit II,3,Older Person,['T62'],UC14
+US098,"As an older person, I would like ALFRED to give me goals and missions that encourage me to do new activities and exercises and to go out",Motivation of New Activities,1,Older Person,"['T54', 'T72']",UC24
+US099,"As an older person, I would like ALFRED to set limits in the games duration as I get bored easily",Limited Serious Games duration,3,Older Person,"['T71', 'T72']",UC15
+US100,"As an older person, I would like to play games where I can use my imagination",Use of Imagination,3,Older Person,"['T71', 'T72']",UC15
+US101,"As an older person, I would like to do guided exercises with ALFRED ALFRED should also use sensors to capture health data while I am doing exercises",Use of Health Data in Serious Games,2,Older Person,"['T61', 'T62', 'T71', 'T72']",UC15
+US102,"As an older person, I would like to have games that include my favourite sports (swimming, badminton, mountaineering, tennis, skiing, music…)",Games for Interests,2,Older Person,"['T34', 'T71', 'T72']",UC24
+US103,"As an older person, I would like to receive suggestions about local sport classes",Suggestions for Sports,2,Older Person,"['T52', 'T54']",UC13
+US104,"As an older person, I would like ALFRED to remind me to keep a good body posture",Good Posture,1,Older Person,"['T61', 'T62']",UC24
+US106,"As an older person, I would like to receive specific tips how to reduce my health impairments without medication (for instance, go for more walks and eat healthier)",Tips for healthy lifestyle,3,Older Person,"['T43', 'T61']",UC1
+US107,"As an older person, I would like to have some games that show me how good my memory and physical health is",Evaluating Games,2,Older Person,"['T71', 'T72']",UC24
+US108,"As an older person, I would like to have training for specific muscle groups",Training for Muscles I,3,Older Person,"['T71', 'T72']",UC22
+US110,"As an older person, I would like to be able to see my training performance",Results of exercise,3,Older Person,"['T61', 'T64']",UC14
+US111,"As an older person, I would like ALFRED to help to motivate me during the week to do exercise that should change daily, as the constant change motivates me",Changing Daily exercise,3,Older Person,"['T44', 'T61', 'T71', 'T72']",UC15
+US113,"As an older person I would like to games that require the combination of mental and physical exercise, such as opposing motion exercises of the arms and legs",Varied exercise II,2,Older Person,"['T61', 'T71', 'T72']",UC15
+US119,"As a developer, I want to present my app to as many people as possible",Clientele,3,Developer,"['T94', 'T95']",UC41
+US120,"As a developer, I want the accounting to be as simple and clear as possible",Accounting,3,Developer,['T95'],UC41
+US121,"As a developer, I want to easily create and to maintain my apps within the market place",Manage Apps,3,Developer,['T95'],UC41
+US122,"As a developer, I want to enable customers to provide feedback about my App and need an easy way to watch this feedback",Feedback,3,Developer,['T95'],UC41
+US123,"As a developer, I need an easy way to manage the pricing modality of my Apps",Pricing Modality,4,Developer,['T95'],UC41
+US124,"As a developer, I need the API to be well-defined and well-documented",API Documentation,1,Developer,"['T94', 'T96']",UC41
+US125,"As a developer, I need support in order to develop Apps (eg tools, examples, tutorials, etc)",Development Support,1,Developer,"['T94', 'T95']",UC41
+US126,"As a developer, I need to know the fees the provider of the market place charges for using the platform",Fees,4,Developer,['T95'],UC41
+US127,"As a developer, I need to be notified as soon as possible when the state of any of my Apps changes (eg during review process)",App Status,3,Developer,['T95'],UC41
+US128,"As a developer, I need detailed information of what happened when my App crashes on the user’s device",Crash Details,4,Developer,['T94'],UC41
+US129,"As a developer, I want to present my App in several ways (eg description, screenshots, videos, etc)",Marketing,3,Developer,"['T94', 'T95']",UC41
+US130,"As a developer, I want to be able to design my App on my own – though there will be a few rules I have to stand to",App Design,3,Developer,"['T95', 'T96']",UC41
+US131,"As a developer, I need an easy way to define questions (or actions) the user can ask and perform",Usability,1,Developer,['T41'],UC41
+US132,"As a developer, I need my App to be granted access to several operating system features (eg positioning, the microphone, web access, etc)",Device Functions,2,Developer,"['T31', 'T32']",UC41
+US133,"As a developer, I want the API components to be on a high level so that I don’t have to deal with their details",High Level API,2,Developer,"['T31', 'T32', 'T33', 'T34']",UC41
+US134,"As a developer, I need an easy way to read data from health sensors the user is wearing",Sensor Access,2,Developer,['T31'],UC41
+US135,"As a developer for serious games, I need to be able to take control over some functions to provide the desired user experience (eg full screen drawing, responding to touch inputs, etc)",Game Abilities,3,Developer,['T74'],UC41
+US136,"As a developer, I want to provide an easy way to manage the user settings",User Settings,3,Developer,"['T31', 'T34']",UC41
+US137,"As a developer, I want the ALFRED API to reduce the work to achieve my goals",API Assistance,2,Developer,"['T31', 'T32', 'T33', 'T34']",UC41

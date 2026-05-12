@@ -1,0 +1,15 @@
+{
+    "timestamp": "2026-03-26T23:26:37.214199",
+    "prompts": {
+        "context_related": "\n# Your Task:\nGenerate a user story faithful to the epic story title, the specifications chunk and related user stories (from the same epic story) that you have.\n\n# Input to your disposal:\n\n### Software Specifications Chunk :\n{specs}\n\n### Related User Stories :\n{related_user_stories}\n\n### Epic Story Title :\n{epic}\n\n# Output Expected:\nA user story fitting the epic, specifications chunk and related user stories, following the 'As a [role], I want [feature], so that [value]' format.\n",
+        "context_only": "\n# Your Task:\nGenerate a user story faithful to the specifications chunk that you have.\n\n# Input to your disposal:\n\n### Software Specifications Chunk :\n{specs}\n\n# Output Expected:\nA user story fitting the specifications chunk, following the 'As a [role], I want [feature], so that [value]' format.\n",
+        "related_only": "\n# Your Task:\nGenerate a user story faithful to the epic title that you have.\n\n# Input to your disposal:\n\n### Epic Story Title :\n{epic}\n\n# Output Expected:\nA user story fitting the epic title, following the 'As a [role], I want [feature], so that [value]' format.\n",
+        "no_context_no_epic": "\nGenerate a user story based on the theme of your choice.\n"
+    },
+    "strategy_names": [
+        "context_related",
+        "context_only",
+        "related_only",
+        "no_context_no_epic"
+    ]
+}

@@ -34,7 +34,14 @@ $$
 $\texttt{Cohesion}$ captures the quality of the backlog breakdown. More specifically, it evaluated semantic proximity of user stories in a given epic and the semantic separation of epic stories. In other words, $\texttt{Cohesion}$ reflects if user stories are in the appropriate epic and if epics are distinct from one another from a semantic perspective. The goal is to compare clustering labels $\hat y_\text{epic} = \phi_\theta(\mathcal{B})$ produced by a clustering algorithm $\phi_\theta$ and the actual epic label $y_{\text{epic}}$. If the two sets of labels $\hat y_\text{epic}$ and $y_{\text{epic}}$ are similar relative to a permutation-invariant metric $\psi$ such as Rand-Index or Mutual Information, it tells us that the epic story assigned to each user story by a Product Owner (or a LLM) are are similarly organized on the semantic level. Thus, epic stories are semantically distinct (otherwise $\phi_\theta$ cannot infer clusters) and user stories are correctly assigned to epic stories.
 
 $$
-\texttt{Coh}(\mathcal{B}) = \psi(y_{\text{epic}}, \phi_\theta(\mathcal{B}))
+\texttt{Coh}(\mathcal{B}) = \frac{\psi(y_{\text{epic}}, \phi_\theta(\mathcal{B})) \times \rho}{\psi(y_{\text{epic}}, \phi_\theta(\mathcal{B})) + \rho}
+$$
+
+>[!NOTE]
+The penalization of the cohesion is updated compared to the original paper as it yields better overall results. $\rho$ corresponds to the Type-Token Ratio (TTR) of the subset of user stories in the backlog $\mathcal{B}$.
+
+$$
+\rho(\mathcal{B}) = \frac{|\text{unique\_tokens}(\mathcal{B})|}{|\text{total\_tokens}(\mathcal{B})|}
 $$
 
 ## 🚀 Features
@@ -163,10 +170,14 @@ COEUR-Score/
 │   ├── retro/                     # Retro dataset
 │   └── trident/                   # Trident dataset
 ├── experiments/              # Experimental scripts and notebooks
-│   ├── metrics_monitoring.ipynb   # Paper results
-│   ├── monitor.ipynb              # Individual features analysis
-│   ├── plot_incremental_noise.py  # Plotting helpers for incremental noise experiment
-│   └── reworked_incremental_noise.py # Incremental noise experiment
+│   └── llm_based/          # Experiments evaluating LLM-based user story generation
+        ├── icl.ipynb                # In-context learning experiment (1, 2, 3 with different visualizations)
+│       └── sft.ipynb                # Supervised fine-tuning experiment
+│   └── noise_based/        # Experiments evaluating noise-based user story generation
+│       ├── metrics_monitoring.ipynb   # Paper results
+│       ├── monitor.ipynb              # Individual features analysis
+│       ├── plot_incremental_noise.py  # Plotting helpers for incremental noise experiment
+│       └── reworked_incremental_noise.py # Incremental noise experiment
 └── images/                   # Logos
 ```
 
@@ -174,7 +185,7 @@ COEUR-Score/
 
 The repository includes comprehensive experiments developed in the paper evaluating COEUR against baseline methods:
 
-### Running Experiments
+### Running ICL Experiments
 
 ```bash
 # Run incremental noise experiments
@@ -183,6 +194,10 @@ python experiments/reworked_incremental_noise.py
 # Generate visualizations
 python experiments/plot_incremental_noise.py
 ```
+
+### Running LLM-based Experiments
+
+Run the notebook `sft.ipynb` to train and test your LLM. Make sure to select the model you want by setting the variable `model_id`.
 
 ### Available Datasets
 
@@ -203,6 +218,8 @@ COEUR-Score includes implementations of existing user story quality metrics:
 from coeur.baseline.qus.aqusacore import AQUSA
 from coeur.baseline.usqa.usqa import USQA
 
+user_stories = ... # List of str
+
 # Compare with baselines
 aqusa = AQUSA(user_stories)
 aqusa_score = aqusa.compute()
@@ -210,6 +227,8 @@ aqusa_score = aqusa.compute()
 usqa = USQA(user_stories)
 usqa_score = usqa.compute()
 ```
+
+## Additionnal Results for Noise-based Experiments
 
 ### Retro Dataset - results
 

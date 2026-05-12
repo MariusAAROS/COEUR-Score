@@ -1,0 +1,161 @@
+epic,user_story
+Authentication and Identity,As a collection manager or cataloger I want to be able to see who last edited a record and when.
+Authentication and Identity,As a collection manager I want to restrict who has create/update/delete access to records in my collection.
+Authentication and Identity,As a collection manager I want to restrict who has edit access to individual records in my collection.
+Authentication and Identity,As a collection manager I want to restrict access to collection metadata.
+CRUD,"- I want to see a template that lets me generate a user story for another cataloger.
+
+- I want to be able to use a template, that helps you to build a user story with the code without having to create it.
+
+Create an Interface for my User Story:
+- The template looks like a normal application template but it gives me some extra features.
+
+- When I build the UI it will be easy to get to the template and use the form easily.
+
+- After having built the UI I want to be able to run the UI, so I can put the UI in the template and run the UI using the template.
+
+Build an Interface
+The UI is the template, so it is"
+CRUD,"Create/Update a User Story
+
+Related Projects:"
+Save vs. Publish,As a cataloger I want to be able to save a record without all of the required metadata so that I can start a record with the metadata I have and come back to finish it later.
+Save vs. Publish,As a user I want to be able to save a record only when the record has an identifier so that we don't end up with a bunch of empty records in the collection.
+Save vs. Publish,"As a user I want to be able to publish records only when the record has a Title, Identifier, Type, and"
+Search/Browse/Filter,As a cataloger I want a list of all of the records I have access to so I can get to work quickly.
+Search/Browse/Filter,As a collection manager I want to search for records based on status so I can track the progress of a collection.
+Search/Browse/Filter,As a cataloger or collection manager I want to be able to search for records based on all Duke Core fields.
+Search/Browse/Filter,As an end user I want to be able to search across all collections at once.
+Support Duke Core,As a cataloger and a collections manager I want Trident to support Duke Core so that metadata is consistent between collections.
+Support Duke Core,As a collections manager I want required DC fields to be enforced so that all records have values for all required DC fields. ♦
+Support Duke Core,As a collections manager I want to be able to repeat repeatable DC Fields so that I can enter all of the relevant metadata. ♦
+Support Duke Core,As a collections manager I want Optional DC fields to be available but not required so that my collection can decide to use them or not. ♦
+Authority Control,As a collection manager I want to be able to create controlled vocabularies so that they can be used as authority lists during metadata creation.
+Authority Control,As a cataloger I want authority lists to be easily accessible and contextually relevant so it is easy to use the authority.
+Authority Control,As a collection manager I want to use external authority lists so I they can be used during metadata creation.
+Create/Update Interface,"Related User Stories:
+- At the end of a day, a user wants to add a new user to a group to help them in their organization. The group wants to be able to add as many users as they'd like in the end of a week.
+- At the end of a day, a user wants to add a new member to a group to help them in their organization. The group wants to be able to add as many members as they'd like in the end of a week.
+
+How it works:
+
+- The new user story is going to be reviewed and approved to approve to create a new user from the user list. If the user story does not approve to create a new user, it should"
+Create/Update Interface,"Create/Retrieve/Update/Delete User Stories
+
+Note: the User Story definition above includes a description of each requirement and can be added or modified as needed.
+
+Next Steps
+
+Create/Retrieve/Update/Delete User Stories
+
+  • Create/Retrieve/Update/Delete Item specifications for scanning systems, search collections, and search management interfaces
+  • Create/Retrieve/Update/Delete Component specifications, for cataloging and collection management"
+Create/Update Interface,"Create/update the interface to perform these UI tasks
+
+Generate a new user story:
+
+Create/update the interface to perform these UI tasks
+
+Add User Story:
+
+Add Users who are responsible for creating/editing/updating UI
+
+Run the following steps:
+
+Run the following steps:
+- Add an item to the catalogue
+- Create/edit/delete the catalog
+- View/edit the catalog
+- Add/edit the catalog
+- Show the user story in the dashboard with an item on the create/update screen
+
+Remove Users from the System that are responsible for performing these UI tasks
+
+Create/update the interface to perform these UI tasks
+
+Run the following steps:"
+Item Status,"- Update Item
+- Update Metadata
+- Create new Items
+- Create new Metadata
+
+The new Item might be a request for a new collection, an item that can have to do with an item with a problem or a new collection.
+
+Epic: Item Status:
+
+Related User Stories:
+- As a collection manager I want statuses to include a status that flags a record as having a problem so we can track issues as the arise.
+
+Create a new User Story:
+- Add a collection to an item
+- Remove a collection from an item
+
+Add a Collection
+
+Tasks: Manage Collection
+   Update Collection status
+
+Epic: Collection Status
+
+Related User Stories:
+- As"
+Item Status,"Tasks:  Add Item Progress to Collections      Add Item Status to Collections       Add Item Manager for Collection Manager  View item
+
+Epic: Report Item 
+
+Related User Stories:
+-  List all the collections and items that have no items marked as deleted  Display the item status  Display all current items  Show that the data for a given record is updated  Add collection/item manager and request update  Show the item status, request the update
+
+Epic: Delete Item
+
+Related User Stories:
+- Add delete to Collections (or collection manager)  Delete from Collection Manager (or Collection Manager)   Remove all elements from collections  Add collection/item manager for collection manager   Deletet items from collection"
+UTF-8 Support,"1. The User Story is ready. [Yes]
+
+2. The User Story needs more features. [Yes]
+
+3. The User Story was not done. [No]
+
+4. The User Story should be more refined. [Yes]
+
+5. The User Story should be done. [Yes]
+
+6. The User Story should get a UI. [Yes]
+
+[1] Do something with the User Story and/or its artifacts.
+
+[2] Create a new User Story.
+
+[3] Create an artifact that demonstrates the user story.
+
+[4] Create a new User Story.
+
+[5] Add the User Story to Trident
+
+[6] Add the"
+Metadata Ingestion,As a collection manager I want to map fields in inherited metadata to Duke Core fields and import a spreadsheet and create records.
+Metadata Ingestion,As a collection manager I want to import metadata and create records from a DCP digitazation guide.
+Integrate Digital Collections with other resources,As a Archivist I want bi-directional linking between items in the digital collections and EAD finding aids
+Integrate Digital Collections with other resources,As a End User I want to be able to see the physical context of an Item in a digital collection (i.e. See inside this folder; EAD)
+Integrate Digital Collections with other resources,As a Collection Manager I want my collection to be discoverable in the Catalog
+Components,As a Digital Production User (DPU) I want to be able to create Components.
+Components,As a DPU I want to create Technical Metadata with for Component.
+Components,As a DPU I want to create Preservation Metadata for a Component.
+Components,As a DPU I want to upload master surrogates to a Component.
+Components,As a DPU I want to add one or more Components to an Item.
+Components,As a DPU I want to create structural metadata for an Item so I can define the sequence of components.
+Components,"As a Digital Production Developer (DPD) I want to group components that require digitization so that I can create ""digitizable units""."
+Components,As a DPU I want to check-out/check-in groups of Components.
+Components,As a DPD I want to verify the correctness and completeness of components so that I can ensure quality standards are met.
+Components,As a DPD I want to capture digitization statistics so that I can monitor Operator efficiency and make projections for future projects.
+Components,As a DPU I want Trident to create derivatives for me when I upload a Master.
+Collection Management,As a User I want to monitor the progress of a digital collection project.
+Collection Management,As a user I want to see how many Items have been digitized.♦
+Collection Management,As a user I want to see how many digitized Items have been described.♦
+Collection Management,As a user I want to see how many Items have been published.♦
+Collection Management,As Collection Manager or Sponsor I want to describe the collection.
+Collection Management,As a Preservation Librarian I want the relationship between masters and derivatives to be managed by the system so I don't have to.
+Metadata Application Profiles,As a Metadata Librarian I want to define the metadata schema for a collection.
+Metadata Application Profiles,As a Metadata librarian I want to define Authorities to be used for specific fields in a collection MD Schema.
+Metadata Application Profiles,As a Metadata Librarian I want to define validation rules for specific fields in a collection.
+Metadata Application Profiles,As a Metadata Librarian I want validation rules enforced when MD is submitted.
