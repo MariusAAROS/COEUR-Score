@@ -40,6 +40,7 @@ $$
 > [!NOTE]
 > The penalization of the cohesion is updated compared to the original paper as it yields better overall results. $\rho$ corresponds to the Type-Token Ratio (TTR) of the subset of user stories in the backlog $\mathcal{B}$.
 
+TTR write as :
 $$
 \rho(\mathcal{B}) = \frac{|\text{unique\_tokens}(\mathcal{B})|}{|\text{total\_tokens}(\mathcal{B})|}
 $$
