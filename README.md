@@ -228,46 +228,56 @@ usqa = USQA(user_stories)
 usqa_score = usqa.compute()
 ```
 
-## Additionnal Results for Noise-based Experiments
+## Additional Results for Noise-based Experiments
 
 ### Retro Dataset - results
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/retro_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/retro_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/retro_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/retro_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/retro_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/retro_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/retro_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/retro_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
 
 ### Trident Dataset - results
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/trident_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/trident_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/trident_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/trident_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/trident_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/trident_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/trident_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/trident_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
 
 ### Alfred Dataset - results
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/alfred_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/alfred_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/alfred_ext_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/alfred_ext_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
 
 ##### External Noising Experiment
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/baselines/alfred_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
-  <img src="images/baselines/alfred_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/alfred_int_abs.png" alt="COEUR-Score Logo" style="width: 48%;"/>
+  <img src="images/additional-results/noised-based/alfred_int_cor.png" alt="COEUR-Score Banner" style="width: 48%;"/>
 </div>
+
+## Additional Results for LLM-based Experiments
+
+### GPT-4.1-mini Results
+
+![](images/additional-results/llm-based/figure_4_equivalent_gpt-4.1-mini.png)
+
+### Mistral-Small-22b Results
+
+![](images/additional-results/llm-based/figure_4_equivalent_mistral-small.png)
