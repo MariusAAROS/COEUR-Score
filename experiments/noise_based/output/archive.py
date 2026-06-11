@@ -12,7 +12,7 @@ def archive_experiment_results(archive_folder_name: str):
         Name of the folder to create for archiving results
     """
     # Define paths
-    output_base = Path("experiments/output")
+    output_base = Path("experiments/noise_based/output")
     datasets = ["alfred", "retro", "trident"]
     experiment_types = ["epic", "story"]
     
