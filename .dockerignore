@@ -1,0 +1,45 @@
+# Version control / IDE
+.git
+.gitignore
+.github
+.vscode
+.idea
+
+# Python caches & build artifacts
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Notebook checkpoints
+**/.ipynb_checkpoints/
+
+# Local secrets / environment
+.env
+
+# Docker files themselves (not needed inside the image)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Windows-only frozen requirements (image uses requirements-linux.txt)
+requirements.txt
+
+# Large generated assets not required to run the artifact
+images/
+
+# Experiment outputs (re-generated inside the container)
+experiments/output/
+experiments/**/output/
+
+# OS cruft
+.DS_Store
+Thumbs.db

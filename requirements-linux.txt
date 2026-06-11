@@ -24,12 +24,12 @@ comm==0.2.3
 contourpy
 cryptography==42.0.8
 cycler==0.12.1
-dbus-python==1.2.18
+# dbus-python==1.2.18  # OS-provided (needs system libdbus); not pip-installable in container
 debugpy==1.8.17
 decorator==5.2.1
 defusedxml==0.7.1
 distro==1.7.0
-distro-info==1.1+ubuntu0.2
+# distro-info==1.1+ubuntu0.2  # Ubuntu-local version, not on PyPI
 exceptiongroup==1.2.1
 executing==2.2.1
 faiss-cpu==1.12.0
@@ -38,7 +38,8 @@ filelock==3.20.0
 flatbuffers==24.3.25
 fonttools==4.60.1
 fqdn==1.5.1
-fsspec==2025.9.0
+# fsspec relaxed from 2025.9.0 -> 2025.3.0 for Docker: datasets 3.6.0 requires fsspec<=2025.3.0
+fsspec==2025.3.0
 gast==0.5.4
 google-pasta==0.2.0
 greenlet==3.0.3
@@ -146,16 +147,17 @@ psutil==7.1.0
 ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.23
-pydantic==2.7.3
-pydantic_core==2.18.4
+# pydantic bumped from 2.7.3 -> 2.9.2 for Docker: langchain>=2.7.4 and ollama>=2.9 require it (pydantic_core bumped to matching 2.23.4)
+pydantic==2.9.2
+pydantic_core==2.23.4
 Pygments==2.19.2
-PyGObject==3.42.1
+# PyGObject==3.42.1  # OS-provided (needs system gobject/cairo libs); not pip-installable in container
 PyJWT==2.3.0
 pynndescent==0.5.13
 pyOpenSSL==24.1.0
 pyparsing==3.2.5
 pypdf==6.1.1
-python-apt==2.4.0+ubuntu3
+# python-apt==2.4.0+ubuntu3  # Ubuntu system package, not on PyPI
 python-dateutil==2.9.0.post0
 python-json-logger==4.0.0
 pytz==2025.2
@@ -183,11 +185,12 @@ soupsieve==2.8
 SQLAlchemy==2.0.30
 stack-data==0.6.3
 sympy==1.14.0
-tensorboard==2.20.0
-tensorboard-data-server==0.7.2
-tensorboardX==2.6.2.2
-tensorflow==2.20.0
-tensorflow-io-gcs-filesystem==0.37.0
+# tensorboard==2.20.0
+# tensorboard-data-server==0.7.2
+# tensorboardX==2.6.2.2
+# tensorflow==2.20.0
+# tensorflow-io-gcs-filesystem bumped 0.37.0 -> 0.37.1 for Docker: no cp312 wheel exists for 0.37.0
+# tensorflow-io-gcs-filesystem==0.37.1
 termcolor==2.4.0
 terminado==0.18.1
 tf_keras==2.20.1
@@ -206,7 +209,7 @@ types-python-dateutil==2.9.0.20251008
 typing_extensions==4.15.0
 tzdata==2025.2
 umap-learn==0.5.9.post2
-unattended-upgrades==0.1
+# unattended-upgrades==0.1  # Ubuntu system package, not on PyPI
 uri-template==1.3.0
 urllib3==2.5.0
 wadllib==1.3.6
@@ -218,3 +221,17 @@ Werkzeug==3.0.3
 widgetsnbextension==4.0.14
 wrapt==1.16.0
 zipp==1.0.0
+
+# --- Added for Docker / artifact-evaluation reproducibility ---
+# Imported by the source code and experiment notebooks but absent from the
+# original pip freeze above.
+evaluate==0.4.3
+datasets==3.6.0
+spacy==3.8.7
+pyspellchecker==0.8.2
+python-dotenv==1.0.1
+pyprojroot==0.3.0
+langchain-community==0.3.27
+langchain-text-splitters==0.3.11
+langchain-openai==0.3.35
+langchain-ollama==0.3.10

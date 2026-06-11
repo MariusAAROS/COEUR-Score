@@ -92,7 +92,65 @@ nltk.download('punkt_tab')
 spacy.cli.download("en_core_web_sm")
 ```
 
-## 📊 Usage
+## � Artifact Evaluation (Docker)
+
+For reviewers, the repository ships a self-contained, GPU-enabled Docker image.
+It pins the exact dependency versions, pre-downloads every model and NLP corpus,
+and launches Jupyter Lab so the demo and experiments run out of the box.
+
+> The code automatically falls back to CPU when no GPU is available, so the
+> image runs on any host. A GPU only speeds things up.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (with Docker Compose v2).
+- **For GPU acceleration only:** an NVIDIA GPU, recent driver, and the
+  [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+### Build & run
+
+```bash
+# Build the image (downloads models at build time; this step is large).
+docker build -t coeur-score .
+
+# Run with GPU access...
+docker run --rm --gpus all -p 8888:8888 coeur-score
+
+# ...or on a CPU-only host (drop --gpus all):
+docker run --rm -p 8888:8888 coeur-score
+```
+
+Then open the `http://127.0.0.1:8888/lab?token=...` URL printed in the logs and
+run `example/coeur_demo.ipynb`.
+
+Using Docker Compose (GPU reservation pre-configured):
+
+```bash
+docker compose up --build
+# On a CPU-only host, remove the `deploy.resources` block in docker-compose.yml first.
+```
+
+### Headless smoke test
+
+Execute the demo notebook end-to-end without opening a browser:
+
+```bash
+docker run --rm coeur-score \
+  jupyter nbconvert --to notebook --execute example/coeur_demo.ipynb --output /tmp/out.ipynb
+```
+
+### Reproduction scope
+
+- **Core metrics, baselines (AQUSA/USQA) and noise-based experiments** run fully
+  offline inside the container.
+- **LLM-based generation experiments** (`experiments/llm_based/icl*.ipynb`,
+  `sft.ipynb`) additionally require external resources — an Azure OpenAI
+  deployment and/or a reachable Ollama server, and a GPU for fine-tuning. Copy
+  `.env.example` to `.env` and fill in the credentials, then pass it to the
+  container (Docker Compose loads it automatically, or use
+  `docker run --env-file .env ...`).
+
+## �📊 Usage
 
 ### Basic Usage (Available in `example/coeur_demo.ipynb`)
 
