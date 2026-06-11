@@ -53,46 +53,7 @@ $$
 - **Visualization Tools**: Interactive plots for analysis and monitoring
 - **Multi-Dataset Support**: Evaluation across various real-world datasets
 
-## 🛠️ Installation
-
-### Requirements
-
-- Python 3.8+
-- PyTorch
-- Transformers
-- scikit-learn
-- NLTK
-- sentence-transformers
-
-### Setup
-
-1. Clone the repository:
-```bash
-git clone <repository_url>
-cd COEUR-Score
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Download required NLTK and spaCy models:
-```python
-import nltk
-import spacy
-
-# Download NLTK data
-nltk.download('averaged_perceptron_tagger_eng')
-nltk.download('wordnet')
-nltk.download('stopwords')
-nltk.download('punkt_tab')
-
-# Download spaCy model
-spacy.cli.download("en_core_web_sm")
-```
-
-## � Artifact Evaluation (Docker)
+## 🗂️ Easy Installation (Docker)
 
 For reviewers, the repository ships a self-contained, GPU-enabled Docker image.
 It pins the exact dependency versions, pre-downloads every model and NLP corpus,
@@ -150,7 +111,46 @@ docker run --rm coeur-score \
   container (Docker Compose loads it automatically, or use
   `docker run --env-file .env ...`).
 
-## �📊 Usage
+## 🛠️ Manual Installation
+
+### Requirements
+
+- Python 3.12
+- PyTorch
+- Transformers
+- scikit-learn
+- NLTK
+- sentence-transformers
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone <repository_url>
+cd COEUR-Score
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Download required NLTK and spaCy models:
+```python
+import nltk
+import spacy
+
+# Download NLTK data
+nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('punkt_tab')
+
+# Download spaCy model
+spacy.cli.download("en_core_web_sm")
+```
+
+## 📊 Usage
 
 ### Basic Usage (Available in `example/coeur_demo.ipynb`)
 
@@ -243,17 +243,23 @@ COEUR-Score/
 
 The repository includes comprehensive experiments developed in the paper evaluating COEUR against baseline methods:
 
-### Running ICL Experiments
+### Running Noise-based Experiments
 
-```bash
-# Run incremental noise experiments
-python experiments/reworked_incremental_noise.py
+⚠️ These experiments are computationally intensive and may take several hours to run with the default settings (used for the paper results). Consider reducing the number of noise levels, runs, or using a smaller subset of the data for faster execution. They don't require a GPU and can be executed on CPU-only machines.
 
-# Generate visualizations
-python experiments/plot_incremental_noise.py
-```
+1. Run the noise based experiment by executing the script `experiments/reworked_incremental_noise.py`:
+
+2. Explore plots by running the notebook `experiments/noise_based/metrics_monitoring.ipynb` and `experiments/noise_based/feature_monitoring.ipynb`.
 
 ### Running LLM-based Experiments
+
+⚠️ These experiments are computationally intensive. Using a GPU is recommended for Large Language Model (LLM) inference and fine-tuning.
+
+##### In-context Learning (ICL) Experiment
+
+Run the notebooks `icl_generate_strategies-step1.ipynb` and `icl_viz_strategies-step2.ipynb` to evaluate the performance of LLMs in generating user stories based on in-context learning.
+
+##### Supervised Fine-Tuning (SFT) Experiment
 
 Run the notebook `sft.ipynb` to train and test your LLM. Make sure to select the model you want by setting the variable `model_id`.
 
