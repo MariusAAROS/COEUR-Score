@@ -259,6 +259,8 @@ The repository includes comprehensive experiments developed in the paper evaluat
 
 Run the notebooks `icl_generate_strategies-step1.ipynb` and `icl_viz_strategies-step2.ipynb` to evaluate the performance of LLMs in generating user stories based on in-context learning.
 
+Run only the notebook `icl_viz_strategies-step2.ipynb` to visualize the results of the ICL experiment, including the performance of different LLMs and the impact of various prompting strategies on user story generation quality.
+
 ##### Supervised Fine-Tuning (SFT) Experiment
 
 Run the notebook `sft.ipynb` to train and test your LLM. Make sure to select the model you want by setting the variable `model_id`.
