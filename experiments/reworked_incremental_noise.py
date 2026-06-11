@@ -306,15 +306,16 @@ STEMMING = True
 REMOVE_RE_SE_STOPWORDS = True
 REMOVE_STOPWORDS = True
 BATCH_SIZE = 64
+BASE_PATH = "experiments/noise_based/"
 
 #GLOBAL VARIABLES (User should not modify)
 all_available_datasets = ["retro", "trident", "alfred"]
 backlog_path = "datasets/{0}/{0}_backlog.csv"
 specs_path = "datasets/{0}/{0}_specs.pdf"
-os.makedirs("experiments/output/retro/", exist_ok=True)
-os.makedirs("experiments/output/trident/", exist_ok=True)
-os.makedirs("experiments/output/alfred/", exist_ok=True)
-output_folder_path = "experiments/output/{0}/"
+os.makedirs(os.path.join(BASE_PATH, "retro/"), exist_ok=True)
+os.makedirs(os.path.join(BASE_PATH, "trident/"), exist_ok=True)
+os.makedirs(os.path.join(BASE_PATH, "alfred/"), exist_ok=True)
+output_folder_path = os.path.join(BASE_PATH, "{0}/")
 seeds = [i for i in range(N_SEEDS)]
 noise_levels = np.linspace(0.0, 1.0, N_NOISE_LEVELS)
 
