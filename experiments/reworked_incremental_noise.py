@@ -172,8 +172,8 @@ def compute_coeur_with_incremental_noise(X_ref, df_ref, noise_levels=[0.0, 0.5, 
 
         coeur.X = X_ref
         coeur.X_hat = df_ref_noised
-        coherence_score = coeur.score_coherence(highlight=False)
-        coverage_score = coeur.score_coverage(include_mauve=include_mauve, include_bleu=include_bleu,
+        coherence_score = coeur.experimental_score_coherence(highlight=False)
+        coverage_score = coeur.experimental_score_coverage(include_mauve=include_mauve, include_bleu=include_bleu,
                                               include_bleurt=include_bleurt, include_meteor=include_meteor,
                                               backlog_wise=bwise, epic_wise=ewise, story_wise=swise, verbose=False)
         if include_aqusa:
@@ -310,7 +310,10 @@ BATCH_SIZE = 64
 all_available_datasets = ["retro", "trident", "alfred"]
 backlog_path = "datasets/{0}/{0}_backlog.csv"
 specs_path = "datasets/{0}/{0}_specs.pdf"
-output_folder_path = "experiments/output/{1}/"
+os.makedirs("experiments/output/retro/", exist_ok=True)
+os.makedirs("experiments/output/trident/", exist_ok=True)
+os.makedirs("experiments/output/alfred/", exist_ok=True)
+output_folder_path = "experiments/output/{0}/"
 seeds = [i for i in range(N_SEEDS)]
 noise_levels = np.linspace(0.0, 1.0, N_NOISE_LEVELS)
 

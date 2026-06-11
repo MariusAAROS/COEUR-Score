@@ -221,10 +221,6 @@ Werkzeug==3.0.3
 widgetsnbextension==4.0.14
 wrapt==1.16.0
 zipp==1.0.0
-
-# --- Added for Docker / artifact-evaluation reproducibility ---
-# Imported by the source code and experiment notebooks but absent from the
-# original pip freeze above.
 evaluate==0.4.3
 datasets==3.6.0
 spacy==3.8.7
@@ -235,3 +231,4 @@ langchain-community==0.3.27
 langchain-text-splitters==0.3.11
 langchain-openai==0.3.35
 langchain-ollama==0.3.10
+yattag

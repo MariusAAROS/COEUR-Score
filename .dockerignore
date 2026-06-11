@@ -36,10 +36,6 @@ requirements.txt
 # Large generated assets not required to run the artifact
 images/
 
-# Experiment outputs (re-generated inside the container)
-experiments/output/
-experiments/**/output/
-
 # OS cruft
 .DS_Store
 Thumbs.db
