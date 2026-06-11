@@ -265,6 +265,7 @@ def split_coeur_results(results, coherence=True, coverage=True,
 def save_results(results, main_folder_path, experiment_type):
     results = deepcopy(results)
     current_path = os.path.join(main_folder_path, experiment_type)
+    os.makedirs(current_path, exist_ok=True)
     folder_index = len([f for f in os.listdir(current_path) if f.startswith("run_")]) + 1
     folder_path = os.path.join(current_path, f"run_{folder_index}.json")
 
