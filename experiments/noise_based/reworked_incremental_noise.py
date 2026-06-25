@@ -172,8 +172,8 @@ def compute_coeur_with_incremental_noise(X_ref, df_ref, noise_levels=[0.0, 0.5, 
 
         coeur.X = X_ref
         coeur.X_hat = df_ref_noised
-        coherence_score = coeur.score_coherence(highlight=False)
-        coverage_score = coeur.score_coverage(include_mauve=include_mauve, include_bleu=include_bleu,
+        coherence_score = coeur.experimental_score_coherence(highlight=False)
+        coverage_score = coeur.experimental_score_coverage(include_mauve=include_mauve, include_bleu=include_bleu,
                                               include_bleurt=include_bleurt, include_meteor=include_meteor,
                                               backlog_wise=bwise, epic_wise=ewise, story_wise=swise, verbose=False)
         if include_aqusa:
@@ -265,6 +265,7 @@ def split_coeur_results(results, coherence=True, coverage=True,
 def save_results(results, main_folder_path, experiment_type):
     results = deepcopy(results)
     current_path = os.path.join(main_folder_path, experiment_type)
+    os.makedirs(current_path, exist_ok=True)
     folder_index = len([f for f in os.listdir(current_path) if f.startswith("run_")]) + 1
     folder_path = os.path.join(current_path, f"run_{folder_index}.json")
 
@@ -305,12 +306,16 @@ STEMMING = True
 REMOVE_RE_SE_STOPWORDS = True
 REMOVE_STOPWORDS = True
 BATCH_SIZE = 64
+BASE_PATH = "experiments/noise_based/"
 
 #GLOBAL VARIABLES (User should not modify)
 all_available_datasets = ["retro", "trident", "alfred"]
 backlog_path = "datasets/{0}/{0}_backlog.csv"
 specs_path = "datasets/{0}/{0}_specs.pdf"
-output_folder_path = "experiments/output/{1}/"
+os.makedirs(os.path.join(BASE_PATH, "retro/"), exist_ok=True)
+os.makedirs(os.path.join(BASE_PATH, "trident/"), exist_ok=True)
+os.makedirs(os.path.join(BASE_PATH, "alfred/"), exist_ok=True)
+output_folder_path = os.path.join(BASE_PATH, "{0}/")
 seeds = [i for i in range(N_SEEDS)]
 noise_levels = np.linspace(0.0, 1.0, N_NOISE_LEVELS)
 

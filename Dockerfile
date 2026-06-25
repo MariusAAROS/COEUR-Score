@@ -101,6 +101,15 @@ PY
 # --- Project source ---------------------------------------------------------
 COPY . /app
 
+# --- Jupyter configuration --------------------------------------------------
+# Install a server config so that root_dir is always /app (the repo root)
+# regardless of how Jupyter is launched (docker compose, VS Code attach, etc.).
+RUN mkdir -p /root/.jupyter /root/.ipython/profile_default/startup
+COPY jupyter_server_config.py /root/.jupyter/jupyter_server_config.py
+# Ensure every notebook kernel starts with cwd=/app (the repo root) so that
+# relative paths like "datasets/..." resolve correctly in any notebook.
+COPY ipython_startup_chdir.py /root/.ipython/profile_default/startup/00-chdir.py
+
 # --- Jupyter ----------------------------------------------------------------
 EXPOSE 8888
 
@@ -112,4 +121,4 @@ CMD ["jupyter", "lab", \
      "--port=8888", \
      "--no-browser", \
      "--allow-root", \
-     "--ServerApp.root_dir=/app"]
+     "--notebook-dir=/app"]
