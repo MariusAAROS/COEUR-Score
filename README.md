@@ -82,23 +82,7 @@ docker run --rm -p 8888:8888 coeur-score
 ```
 
 Then open the `http://127.0.0.1:8888/lab?token=...` URL printed in the logs and
-run `example/coeur_demo.ipynb`.
-
-Using Docker Compose (GPU reservation pre-configured):
-
-```bash
-docker compose up --build
-# On a CPU-only host, remove the `deploy.resources` block in docker-compose.yml first.
-```
-
-### Headless smoke test
-
-Execute the demo notebook end-to-end without opening a browser:
-
-```bash
-docker run --rm coeur-score \
-  jupyter nbconvert --to notebook --execute example/coeur_demo.ipynb --output /tmp/out.ipynb
-```
+run `example/coeur_demo.ipynb` (or connect via VSCode).
 
 ### Reproduction scope
 
@@ -150,7 +134,7 @@ nltk.download('punkt_tab')
 spacy.cli.download("en_core_web_sm")
 ```
 
-## 🏁 Getting Started
+## 🏁 Getting Started (30 minutes Guide)
 
 The quickest way to try `COEUR` is to run the demo notebook
 [`example/coeur_demo.ipynb`](example/coeur_demo.ipynb). It loads a reference
@@ -204,7 +188,7 @@ that the relative dataset paths resolve correctly.
 | Experiment | Hardware | External services |
 | --- | --- | --- |
 | Noise-based | CPU (GPU optional) | None — runs fully offline |
-| LLM-based | GPU recommended (required for fine-tuning) | Azure OpenAI and/or Ollama |
+| LLM-based | GPU recommended (required for fine-tuning) | Azure OpenAI and/or Ollama for ICL |
 
 ### Noise-based experiments
 
