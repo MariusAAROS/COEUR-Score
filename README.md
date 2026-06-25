@@ -72,7 +72,7 @@ and launches Jupyter Lab so the demo and experiments run out of the box.
 
 ```bash
 # Build the image (downloads models at build time; this step is large).
-docker build -t coeur-score .
+docker build -t coeur-score . # don't do if you use our pre-built image
 
 # Run with GPU access...
 docker run --rm --gpus all -p 8888:8888 coeur-score
@@ -150,65 +150,129 @@ nltk.download('punkt_tab')
 spacy.cli.download("en_core_web_sm")
 ```
 
-## 📊 Usage
+## 🏁 Getting Started
 
-### Basic Usage (Available in `example/coeur_demo.ipynb`)
+The quickest way to try `COEUR` is to run the demo notebook
+[`example/coeur_demo.ipynb`](example/coeur_demo.ipynb). It loads a reference
+document and a backlog, then computes the `COEUR` score at the story, epic and
+backlog levels.
+
+### 1. Launch Jupyter
+
+- **With Docker:** open the `http://127.0.0.1:8888/lab?token=...` URL printed by
+  `docker run ... coeur-score` (see [Easy Installation (Docker)](#️-easy-installation-docker)).
+- **With VSCode:** Get VSCode Docker extension and attach to the Docker container and open the notebook in VS Code.
+- **With a manual install:** from the repository root, start Jupyter and open the
+  notebook:
+
+  ```bash
+  jupyter lab   # or: jupyter notebook
+  ```
+
+### 2. Run `example/coeur_demo.ipynb`
+
+Execute every cell from top to bottom. The notebook walks through the core API:
 
 ```python
 from coeur.score import Coeur
 
-# Initialize the COEUR Scorer and load data
-coeur_scorer = Coeur(random_state=42, lemmatization=True, remove_stopwords=True, stemming=True,
-                     remove_re_se_stopwords=True)
+# Initialize the COEUR scorer and load the data
+coeur_scorer = Coeur(random_state=42, lemmatization=True, remove_stopwords=True,
+                     stemming=True, remove_re_se_stopwords=True)
 R, B = coeur_scorer.load_data(ref_path="datasets/trident/trident_specs.pdf",
-                cand_path="datasets/trident/trident_backlog.csv")
+                              cand_path="datasets/trident/trident_backlog.csv")
 
-# Your user stories as a list of strings
-story_level = coeur_scorer.score(R, B, l="s", lmbd=0.5,
-                   sigma="auto", psi="auto", phi="auto")
+# Compute COEUR at the story, epic and backlog levels
+story_level   = coeur_scorer.score(R, B, l="s", lmbd=0.5, sigma="auto", psi="auto", phi="auto")
+epic_level    = coeur_scorer.score(R, B, l="e", lmbd=0.5, sigma="auto", psi="auto", phi="auto")
+backlog_level = coeur_scorer.score(R, B, l="b", lmbd=0.5, sigma="auto", psi="auto", phi="auto")
 
-epic_level = coeur_scorer.score(R, B, l="e", lmbd=0.5,
-                   sigma="auto", psi="auto", phi="auto")
-
-backlog_level = coeur_scorer.score(R, B, l="b", lmbd=0.5,
-                   sigma="auto", psi="auto", phi="auto")
-
-print(f"Story-level COEUR Score: {story_level}")
-print(f"Epic-level COEUR Score: {epic_level}")
+print(f"Story-level   COEUR Score: {story_level}")
+print(f"Epic-level    COEUR Score: {epic_level}")
 print(f"Backlog-level COEUR Score: {backlog_level}")
 ```
 
-### Cohesion Analysis
+That's it — you now have a working `COEUR` setup. To reproduce the paper's
+experiments, continue with the [step-by-step guide](#-step-by-step-experiments).
 
-```python
-from coeur.cohesion import CohesionScore, CohesionViz
+## 🔬 Step-by-Step Experiments
 
-# Initialize cohesion evaluator
-cohesion_eval = CohesionScore()
+The paper backs `COEUR` with two empirical experiments, both reproducible from
+this repository. Run every command and notebook from the **repository root** so
+that the relative dataset paths resolve correctly.
 
-# Compute cohesion metrics
-cohesion_results = cohesion_eval.compute_cohesion(user_stories)
+| Experiment | Hardware | External services |
+| --- | --- | --- |
+| Noise-based | CPU (GPU optional) | None — runs fully offline |
+| LLM-based | GPU recommended (required for fine-tuning) | Azure OpenAI and/or Ollama |
 
-# Visualize clustering results
-viz = CohesionViz()
-viz.plot_clusters(user_stories, cohesion_results)
+### Noise-based experiments
+
+> [!WARNING]
+> With the default paper settings these runs are computationally intensive and
+> may take several hours. To iterate faster, lower `N_SEEDS` and
+> `N_NOISE_LEVELS`, or restrict `DATASET_NAME` to a single dataset at the top of
+> the script. No GPU required.
+
+1. **Run the experiment.** Execute the incremental-noise script. It saves one
+   JSON result file per run under `experiments/noise_based/<dataset>/`:
+
+   ```bash
+   python experiments/reworked_incremental_noise.py
+   ```
+
+   The hyperparameters (`DATASET_NAME`, `N_SEEDS`, `N_NOISE_LEVELS`, included
+   baselines, etc.) are defined at the top of
+   [`experiments/reworked_incremental_noise.py`](experiments/reworked_incremental_noise.py)
+   and can be edited before running.
+
+2. **Visualize the results.** Run the monitoring notebooks to regenerate the
+   paper figures:
+   - [`experiments/noise_based/metrics_monitoring.ipynb`](experiments/noise_based/metrics_monitoring.ipynb)
+     — metric-level results reported in the paper.
+   - [`experiments/noise_based/features_monitoring.ipynb`](experiments/noise_based/features_monitoring.ipynb)
+     — individual feature analysis.
+
+### LLM-based experiments
+
+> [!WARNING]
+> These experiments require external resources, and a GPU is recommended for LLM
+> inference (and required for fine-tuning).
+
+**Prerequisite — configure credentials.** Copy the template and fill in the
+values for your Azure OpenAI deployment and/or Ollama server:
+
+> [!NOTE]
+> You only need to setup the `.env` file if you want to run `icl_generate_strategies-step1.ipynb` which creates raw strategies for the ICL experiment. The notebook `icl_viz_strategies-step2.ipynb` can be run without any credentials and is already wired to the strategies used for the paper's results.
+
+
+```bash
+cp .env.example .env
+# then edit .env
 ```
 
-### Exhaustiveness Analysis
+With Docker, the variables are loaded automatically by Docker Compose, or pass
+them with `docker run --env-file .env ...`.
 
-```python
-from coeur.exhaustiveness import ExhaustivenessScore, ExhaustivenessViz
+#### In-Context Learning (ICL)
 
-# Initialize exhaustiveness evaluator
-exhaustiveness_eval = ExhaustivenessScore()
+1. **Step 1 — generate.** Run
+   [`experiments/llm_based/icl_generate_strategies-step1.ipynb`](experiments/llm_based/icl_generate_strategies-step1.ipynb).
+   Pick the backend in the LLM cell (`AzureChatOpenAI` or `ChatOllama`). The
+   notebook generates user stories under the four ICL strategies (context +
+   related stories, neither, context-only, epic-only) and writes the outputs to
+   `experiments/llm_based/output/`.
 
-# Compute exhaustiveness metrics
-exhaustiveness_results = exhaustiveness_eval.compute_exhaustiveness(user_stories)
+2. **Step 2 — visualize.** Run
+   [`experiments/llm_based/icl_viz_strategies-step2.ipynb`](experiments/llm_based/icl_viz_strategies-step2.ipynb)
+   to compare the strategies and produce the paper figures. It can be run on its
+   own using the pre-computed outputs from step 1.
 
-# Visualize coverage
-viz = ExhaustivenessViz()
-viz.plot_coverage(user_stories, exhaustiveness_results)
-```
+#### Supervised Fine-Tuning (SFT)
+
+Run [`experiments/llm_based/sft.ipynb`](experiments/llm_based/sft.ipynb) to
+fine-tune and evaluate a model. Select the base model by setting the `model_id`
+variable (e.g. `"HuggingFaceTB/SmolLM2-135M"`). A GPU is required.
 
 ## 📁 Repository Structure
 
@@ -228,42 +292,16 @@ COEUR-Score/
 │   ├── retro/                     # Retro dataset
 │   └── trident/                   # Trident dataset
 ├── experiments/              # Experimental scripts and notebooks
-│   └── llm_based/          # Experiments evaluating LLM-based user story generation
-        ├── icl.ipynb                # In-context learning experiment (1, 2, 3 with different visualizations)
-│       └── sft.ipynb                # Supervised fine-tuning experiment
-│   └── noise_based/        # Experiments evaluating noise-based user story generation
-│       ├── metrics_monitoring.ipynb   # Paper results
-│       ├── monitor.ipynb              # Individual features analysis
-│       ├── plot_incremental_noise.py  # Plotting helpers for incremental noise experiment
-│       └── reworked_incremental_noise.py # Incremental noise experiment
+│   ├── reworked_incremental_noise.py  # Noise-based experiment script
+│   ├── llm_based/                 # LLM-based user story generation experiments
+│   │   ├── icl_generate_strategies-step1.ipynb  # ICL — step 1: generate
+│   │   ├── icl_viz_strategies-step2.ipynb       # ICL — step 2: visualize
+│   │   └── sft.ipynb                            # Supervised fine-tuning experiment
+│   └── noise_based/               # Noise-based experiments and outputs
+│       ├── metrics_monitoring.ipynb   # Paper metric results
+│       └── features_monitoring.ipynb  # Individual feature analysis
 └── images/                   # Logos
 ```
-
-## 🔬 Experiments
-
-The repository includes comprehensive experiments developed in the paper evaluating COEUR against baseline methods:
-
-### Running Noise-based Experiments
-
-⚠️ These experiments are computationally intensive and may take several hours to run with the default settings (used for the paper results). Consider reducing the number of noise levels, runs, or using a smaller subset of the data for faster execution. They don't require a GPU and can be executed on CPU-only machines.
-
-1. Run the noise based experiment by executing the script `experiments/reworked_incremental_noise.py`:
-
-2. Explore plots by running the notebook `experiments/noise_based/metrics_monitoring.ipynb` and `experiments/noise_based/feature_monitoring.ipynb`.
-
-### Running LLM-based Experiments
-
-⚠️ These experiments are computationally intensive. Using a GPU is recommended for Large Language Model (LLM) inference and fine-tuning.
-
-##### In-context Learning (ICL) Experiment
-
-Run the notebooks `icl_generate_strategies-step1.ipynb` and `icl_viz_strategies-step2.ipynb` to evaluate the performance of LLMs in generating user stories based on in-context learning.
-
-Run only the notebook `icl_viz_strategies-step2.ipynb` to visualize the results of the ICL experiment, including the performance of different LLMs and the impact of various prompting strategies on user story generation quality.
-
-##### Supervised Fine-Tuning (SFT) Experiment
-
-Run the notebook `sft.ipynb` to train and test your LLM. Make sure to select the model you want by setting the variable `model_id`.
 
 ### Available Datasets
 
