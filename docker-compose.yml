@@ -1,0 +1,37 @@
+# =============================================================================
+# COEUR-Score — Artifact Evaluation
+# -----------------------------------------------------------------------------
+# Usage:
+#   docker compose up --build      # build + launch Jupyter Lab on :8888
+#   docker compose run --rm coeur python -c "from coeur.score import Coeur"
+#
+# GPU: requires the NVIDIA Container Toolkit on the host. On a CPU-only host,
+# remove the `deploy.resources` block below — the code falls back to CPU.
+# =============================================================================
+services:
+  coeur:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: coeur-score:latest
+    container_name: coeur-score
+    ports:
+      - "8888:8888"
+    # Optional credentials for the LLM-based generation experiments
+    # (icl*.ipynb / sft.ipynb). Copy .env.example to .env first.
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      # Persist datasets and experiment outputs on the host.
+      - ./datasets:/app/datasets
+      - ./experiments:/app/experiments
+      - ./example:/app/example
+    # --- GPU access (NVIDIA Container Toolkit) ------------------------------
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
