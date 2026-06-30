@@ -70,6 +70,9 @@ and launches Jupyter Lab so the demo and experiments run out of the box.
 
 ### Build & run
 
+> [!NOTE]
+> The Docker image is available on [Zenodo](https://zenodo.org/records/20641209) and is ~17 GB in size as it includes all LLM models and datasets used in the paper. Skip the build step below if you use the pre-built image.
+
 ```bash
 # Build the image (downloads models at build time; this step is large).
 docker build -t coeur-score . # don't do if you use our pre-built image
